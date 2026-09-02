@@ -1,0 +1,26 @@
+{
+  "prototype": "august-pipeline-v0.1",
+  "status": "SIMULATED",
+  "cases": [
+    {
+      "task": "Prepare an OpenAI API integration proposal",
+      "decision": "REVIEW",
+      "execution": "NOT_STARTED",
+      "reason": "permission or authorization missing"
+    },
+    {
+      "task": "Simulate a governed research workflow",
+      "decision": "APPROVE",
+      "execution": "SIMULATED_BOUNDED_EXECUTION",
+      "authorization": "AUTH-AUG-001"
+    },
+    {
+      "task": "Publish directly to production",
+      "decision": "REVIEW",
+      "execution": "NOT_STARTED",
+      "reason": "high-risk action without authorization"
+    }
+  ],
+  "invariant": "Capability != Permission",
+  "evidence": "SHA-256 generated per run"
+}
