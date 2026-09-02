@@ -68,7 +68,7 @@ This repository is the working research and implementation surface for GaaS + KA
 
 ## Automation
 
-GitHub Actions workflows live under `.github/workflows/` and are designed to make repository state continuously verifiable. GitHub supports event-, schedule-, and manually-triggered workflows, making it suitable for deterministic repository automation. cite_placeholder
+GitHub Actions workflows live under `.github/workflows/` and can run on repository events, schedules, or manual dispatch. The repository-health workflow uses these mechanisms to continuously verify the minimum documentation and governance invariants.
 
 ## Status
 
