@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Automate.prototype — WebMCP Governance</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">KAIROSEED · AUTOMATE.PROTOTYPE</p>
+      <h1>Capability ≠ Permission</h1>
+      <p class="lede">A WebMCP prototype that separates what an agent <b>can</b> do from what it is <b>authorized</b> to do.</p>
+    </header>
+
+    <section class="panel">
+      <div class="row"><span>WebMCP capability</span><span id="mcp" class="pill">detecting…</span></div>
+      <div class="row"><span>Requested action</span><span class="mono">publish_artifact</span></div>
+      <div class="row"><span>Scope</span><span class="mono">webmcp-challenge</span></div>
+      <div class="row"><span>Authorization</span><span id="auth" class="pill">NOT GRANTED</span></div>
+      <div class="row"><span>Execution</span><span id="execution" class="pill">BLOCKED</span></div>
+    </section>
+
+    <section class="pipeline" aria-label="Governance pipeline">
+      <div>CAPABILITY</div><span>→</span><div>PROPOSAL</div><span>→</span><div>SCOPE</div><span>→</span><div>AUTHORIZATION</div><span>→</span><div>EXECUTION</div><span>→</span><div>EVIDENCE</div>
+    </section>
+
+    <section class="panel">
+      <h2>Controlled execution</h2>
+      <p id="status">No execution admitted. The prototype fails closed until authorization is explicitly granted.</p>
+      <button id="authorize">Grant authorization</button>
+      <button id="execute" disabled>Execute governed action</button>
+      <pre id="evidence" aria-live="polite">Evidence ledger: waiting…</pre>
+    </section>
+
+    <footer>Prototype invariant: authorization precedes execution; execution produces evidence.</footer>
+  </main>
+  <script src="./app.js"></script>
+</body>
+</html>
