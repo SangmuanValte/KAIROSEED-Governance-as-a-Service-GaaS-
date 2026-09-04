@@ -1,0 +1,6 @@
+{
+  "repository": "aionmanifold-svg/aion-manifold",
+  "commit_sha": "4eb5aecb2c56db89ddefbff831c898e3c09ef8c3",
+  "branch": "master",
+  "message": "fix: align eslint dependency with typescript tooling"
+}
