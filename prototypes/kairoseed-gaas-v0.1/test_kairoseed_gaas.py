@@ -1,3 +1,5 @@
+import tempfile
+
 from kairoseed_gaas import ActionProposal, Decision, EvidenceLedger, govern
 
 
@@ -7,6 +9,7 @@ def test_authorized_action_allows_and_records_evidence():
     assert result.decision is Decision.ALLOW
     assert result.evidence_initialized
     assert len(ledger.records) == 1
+    assert ledger.verify_chain()
 
 
 def test_unauthorized_action_blocks():
@@ -36,3 +39,18 @@ def test_evidence_chain_links_records():
     govern(proposal, ledger)
     govern(proposal, ledger)
     assert ledger.records[1]["previous_hash"] == ledger.records[0]["record_hash"]
+    assert ledger.verify_chain()
+
+
+def test_evidence_survives_restart():
+    with tempfile.TemporaryDirectory() as directory:
+        path = f"{directory}/evidence.sqlite3"
+        first = EvidenceLedger(path)
+        govern(ActionProposal("agent-1", "read_report", "authorized", "v0.1"), first)
+        first.close()
+
+        second = EvidenceLedger(path)
+        assert len(second.records) == 1
+        assert second.verify_chain()
+        assert second.records[0]["decision"] == Decision.ALLOW.value
+        second.close()
