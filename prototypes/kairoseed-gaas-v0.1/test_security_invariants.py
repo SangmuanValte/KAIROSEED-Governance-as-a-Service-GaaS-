@@ -1,6 +1,7 @@
 import json
-from dataclasses import asdict
 from hashlib import sha256
+import tempfile
+from concurrent.futures import ThreadPoolExecutor
 
 from kairoseed_gaas import ActionProposal, Decision, EvidenceLedger, govern, proposal_hash
 
@@ -54,7 +55,7 @@ def test_evidence_record_hash_reconstructs():
     assert record["record_hash"] == expected
 
 
-def test_evidence_chain_detects_modified_previous_record():
+def test_evidence_chain_detects_modified_record():
     ledger = EvidenceLedger()
     proposal = ActionProposal("agent-1", "read_report", "authorized", "v0.1")
     govern(proposal, ledger)
@@ -62,9 +63,36 @@ def test_evidence_chain_detects_modified_previous_record():
 
     original_hash = ledger.records[0]["record_hash"]
     ledger.records[0]["reason"] = "tampered"
-    payload = {key: value for key, value in ledger.records[0].items() if key != "record_hash"}
-    canonical = json.dumps(payload, sort_keys=True, separators=(",", ":"))
-    recomputed = sha256(canonical.encode()).hexdigest()
-
-    assert recomputed != original_hash
+    assert not ledger.verify_chain()
     assert ledger.records[1]["previous_hash"] == original_hash
+
+
+def test_concurrent_governance_preserves_chain():
+    with tempfile.TemporaryDirectory() as directory:
+        ledger = EvidenceLedger(f"{directory}/concurrency.sqlite3")
+        proposals = [
+            ActionProposal(f"agent-{index}", "read_report", "authorized", "v0.1")
+            for index in range(32)
+        ]
+        with ThreadPoolExecutor(max_workers=8) as pool:
+            results = list(pool.map(lambda proposal: govern(proposal, ledger), proposals))
+
+        assert all(result.decision is Decision.ALLOW for result in results)
+        assert len(ledger.records) == 32
+        assert ledger.verify_chain()
+        ledger.close()
+
+
+def test_blocked_actions_also_produce_durable_evidence():
+    with tempfile.TemporaryDirectory() as directory:
+        path = f"{directory}/blocked.sqlite3"
+        ledger = EvidenceLedger(path)
+        result = govern(ActionProposal("agent-1", "send_message", "unauthorized", "v0.1"), ledger)
+        assert result.decision is Decision.BLOCK
+        assert len(ledger.records) == 1
+        ledger.close()
+
+        reopened = EvidenceLedger(path)
+        assert reopened.records[0]["decision"] == Decision.BLOCK.value
+        assert reopened.verify_chain()
+        reopened.close()
