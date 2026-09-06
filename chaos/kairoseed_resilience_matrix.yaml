@@ -1,0 +1,71 @@
+version: "0.1"
+name: KAIROSEED Governance Automation — Resilience Matrix
+purpose: >-
+  Define deterministic, sandbox-safe failure simulations for the governance gate.
+  These tests MUST use mocks, local fixtures, or isolated test doubles. They must
+  not intentionally disrupt a host network, production API, node, wallet, or
+  financial service.
+
+release_gate:
+  default: BLOCK
+  require_all:
+    - implementation
+    - prototype_tests
+    - current_head_ci
+    - independent_reproduction
+    - chaos_resilience
+    - current_head_provenance
+    - deployment_controls
+
+scenarios:
+  - id: MEMPOOL_SPIKE_HIGH_FEES
+    stimulus: simulated_mempool_pressure
+    expected:
+      - proposal_re_evaluated
+      - fee_policy_checked
+      - no_authority_escalation
+      - decision_recorded
+    safety: mock_only
+
+  - id: INBOUND_LIQUIDITY_EXHAUSTION
+    stimulus: simulated_liquidity_floor_breach
+    expected:
+      - action_blocked_or_escalated
+      - capability_unchanged
+      - authority_unchanged
+      - evidence_persisted
+    safety: mock_only
+
+  - id: LND_CORE_LIGHTNING_API_DROP
+    stimulus: simulated_dependency_timeout
+    expected:
+      - fail_closed
+      - no_retry_authority_expansion
+      - failure_evidence_persisted
+      - recovery_requires_revalidation
+    safety: local_test_double_only
+
+  - id: SUDDEN_POWER_NETWORK_LOSS
+    stimulus: simulated_process_restart_or_network_partition
+    expected:
+      - incomplete_action_not_claimed_successful
+      - ledger_reopens_consistently
+      - chain_integrity_verified
+      - state_reconciled_before_continuation
+    safety: local_process_simulation_only
+
+invariants:
+  - "CAPABILITY != PERMISSION"
+  - "INTENT != AUTHORITY"
+  - "PROPOSAL != ACTION"
+  - "EXECUTION != SUCCESS"
+  - "RECOVERY != AUTHORIZATION"
+  - "LEARNING != AUTHORITY_ESCALATION"
+  - "NO_SILENT_STATE"
+
+prohibited_test_modes:
+  - host_network_disruption
+  - destructive_ip_route_changes
+  - production_endpoint_fault_injection
+  - credential_exfiltration
+  - real_funds_or_wallet_mutation
