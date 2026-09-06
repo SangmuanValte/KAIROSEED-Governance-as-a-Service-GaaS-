@@ -41,6 +41,7 @@ def authority_invariant(trace: Iterable[dict]) -> bool:
 
 
 def reconstructable(records: list[dict]) -> bool:
+    """Verify chain linkage, EvidenceSeal presence, and record integrity."""
     previous = "GENESIS"
     for record in records:
         if record["previous_hash"] != previous:
@@ -49,6 +50,9 @@ def reconstructable(records: list[dict]) -> bool:
             return False
         payload = {k: v for k, v in record.items() if k != "record_hash"}
         if digest(payload) != record["record_hash"]:
+            return False
+        expected_state_after = digest({"state_before": record["state_before"], "delta": record["delta"]})
+        if record["state_after"] != expected_state_after:
             return False
         previous = record["record_hash"]
     return True
