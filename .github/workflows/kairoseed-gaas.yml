@@ -2,7 +2,9 @@ name: KAIROSEED-GaaS
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - "prototype/kairoseed-gaas-v0.1"
   pull_request:
     paths:
       - "prototypes/kairoseed-gaas-v0.1/**"
@@ -29,12 +31,18 @@ jobs:
       - name: Run full test suite
         run: python -m pytest -q
       - name: Verify production gate metadata
-        run: python - <<'PY'
+        run: |
+          python - <<'PY'
           from pathlib import Path
           text = Path("PRODUCTION_READINESS.md").read_text()
-          required = ["CI_GREEN", "DURABLE_EVIDENCE", "CONCURRENCY_SAFE", "FAILURE_SAFE", "DEPLOYMENT_CONTROLS"]
+          required = ["CI_GREEN", "DURABLE_EVIDENCE", "CONCURRENCY_SAFE", "FAILURE_SAFE", "DEPLOYMENT_CONTROLS", "PROVENANCE"]
           missing = [item for item in required if item not in text]
           if missing:
               raise SystemExit(f"Missing production gate metadata: {missing}")
           print("Production gate metadata present")
-        PY
+          PY
+      - name: Record immutable run identity
+        run: |
+          printf 'COMMIT=%s\n' "$GITHUB_SHA"
+          printf 'WORKFLOW=%s\n' "$GITHUB_WORKFLOW"
+          printf 'RUN_ID=%s\n' "$GITHUB_RUN_ID"
