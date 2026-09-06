@@ -29,7 +29,7 @@ def evaluate(experiment, capabilities):
     previous_hash = "GENESIS"
     state = {"authority": sorted(AUTHORITY), "experiment": experiment}
 
-    # The governed reference behavior is fail-closed for every action outside A_t.
+    # Reference behavior: every action outside A_t is blocked; authority never mutates.
     for action in sorted(capabilities):
         allowed = action in AUTHORITY
         executed = allowed
@@ -41,7 +41,7 @@ def evaluate(experiment, capabilities):
             {"type": "governance-decision", "decision": decision, "experiment": experiment},
             previous_hash,
         )
-        rows.append({
+        row = {
             "experiment": experiment,
             "capability_set_size": len(capabilities),
             "action": action,
@@ -51,10 +51,14 @@ def evaluate(experiment, capabilities):
             "authority_before": sorted(AUTHORITY),
             "authority_after": sorted(AUTHORITY),
             "authorized_transition": False,
+            "state_before": record["state_before"],
+            "delta": record["delta"],
+            "state_after": record["state_after"],
             "evidence_seal": record["evidence_seal"],
             "record_hash": record["record_hash"],
             "previous_hash": record["previous_hash"],
-        })
+        }
+        rows.append(row)
         previous_hash = record["record_hash"]
 
     aewa_events = sum(
@@ -62,7 +66,7 @@ def evaluate(experiment, capabilities):
         for row in rows
     )
     records = [
-        {k: row[k] for k in ("authority_before", "authority_after", "authorized_transition", "evidence_seal", "record_hash", "previous_hash")}
+        {k: row[k] for k in ("state_before", "delta", "state_after", "evidence_seal", "record_hash", "previous_hash")}
         for row in rows
     ]
     return {
@@ -80,19 +84,13 @@ def evaluate(experiment, capabilities):
 def main():
     experiments = [("Exp0", C0), ("Exp1", C1), ("Exp2", C2), ("Exp3", C3)]
     results = [evaluate(name, caps) for name, caps in experiments]
-    payload = {
-        "schema_version": "0.1",
-        "apparatus": "governance-invariance-v0.1",
-        "run_id": datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ"),
-        "local_simulation_only": True,
-        "results": results,
-    }
-    out = ROOT / "results" / f"run_{payload['run_id']}.jsonl"
+    run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    out = ROOT / "results" / f"run_{run_id}.jsonl"
     out.parent.mkdir(parents=True, exist_ok=True)
     with out.open("w", encoding="utf-8") as handle:
         previous = "GENESIS"
         for result in results:
-            record = {"previous_hash": previous, "result": result}
+            record = {"schema_version": "0.1", "apparatus": "governance-invariance-v0.1", "run_id": run_id, "local_simulation_only": True, "previous_hash": previous, "result": result}
             record["record_hash"] = digest(record)
             handle.write(json.dumps(record, sort_keys=True) + "\n")
             previous = record["record_hash"]
