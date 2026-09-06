@@ -1,0 +1,51 @@
+name: Repository Health
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '17 3 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  health:
+    name: Validate repository structure
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check required files
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s README.md
+          test -s docs/architecture.md
+          test -s .github/workflows/repository-health.yml
+
+      - name: Check governance invariants
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -Fq 'Capability ≠ Authority' README.md
+          grep -Fq 'INDEPENDENT AUTHORIZATION' README.md
+          grep -Fq 'EVIDENCE' README.md
+          grep -Fq 'RECONSTRUCTIBLE' docs/architecture.md
+
+      - name: Emit verification summary
+        shell: bash
+        run: |
+          {
+            echo '## GaaS Repository Health'
+            echo ''
+            echo '- Required documentation: present'
+            echo '- Governance invariant: present'
+            echo '- Independent authorization boundary: present'
+            echo '- Evidence/reconstructibility requirements: present'
+            echo '- Result: PASS'
+          } >> "$GITHUB_STEP_SUMMARY"
