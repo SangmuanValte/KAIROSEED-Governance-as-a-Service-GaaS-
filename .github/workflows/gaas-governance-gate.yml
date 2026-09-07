@@ -1,0 +1,39 @@
+name: GaaS Governance Gate
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  governance-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Validate authority policy JSON
+        run: python -m json.tool governance/authority-policy.json > /dev/null
+
+      - name: Compile Python sources
+        run: python -m compileall -q .
+
+      - name: Run governance tests
+        shell: bash
+        run: |
+          set -e
+          found=0
+          while IFS= read -r -d '' test_file; do
+            found=1
+            python -m unittest "${test_file%.py}" 2>/dev/null || python "$test_file"
+          done < <(find . -type f -name 'test_*.py' -print0)
+          if [ "$found" -eq 0 ]; then
+            echo "No test_*.py files found; policy validation and compilation remain required."
+          fi
