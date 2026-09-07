@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/SangmuanValte/KAIROSEED-Governance-as-a-Service-GaaS-/blob/main/Automate.Prototype/governance-record.schema.json",
+  "title": "KairoSeed Governance Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["record_version", "id", "request", "capability", "authorization", "execution", "meta", "links"],
+  "properties": {
+    "record_version": {"type": "string"},
+    "id": {"type": "string", "format": "uuid"},
+    "request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "requester"],
+      "properties": {
+        "type": {"type": "string", "minLength": 1},
+        "requester": {"type": "string", "minLength": 1},
+        "request_context": {"type": "object"}
+      }
+    },
+    "capability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["capability_id", "source_repo", "source_commit"],
+      "properties": {
+        "capability_id": {"type": "string", "minLength": 1},
+        "source_repo": {"type": "string", "minLength": 1},
+        "source_commit": {"type": "string", "minLength": 1},
+        "branch": {"type": "string"}
+      }
+    },
+    "authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decision", "policy_id", "reviewer", "timestamp", "reason"],
+      "properties": {
+        "decision": {"enum": ["ALLOW", "DENY"]},
+        "policy_id": {"type": "string", "minLength": 1},
+        "policy_version": {"type": "string"},
+        "reviewer": {"type": "string", "minLength": 1},
+        "reviewer_role": {"type": "string"},
+        "timestamp": {"type": "string", "format": "date-time"},
+        "reason": {"type": "string", "minLength": 1},
+        "evidence": {"type": "object"}
+      }
+    },
+    "execution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["executed"],
+      "properties": {
+        "executed": {"type": "boolean"},
+        "execution_start": {"type": ["string", "null"], "format": "date-time"},
+        "execution_end": {"type": ["string", "null"], "format": "date-time"},
+        "executor": {"type": "string"},
+        "execution_outcome": {"enum": ["success", "failure", "partial", "skipped", "blocked"]},
+        "execution_log_url": {"type": "string", "format": "uri"}
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "artifact_path": {"type": "string"},
+        "artifact_sha256": {"type": "string", "pattern": "^[A-Fa-f0-9]{64}$"},
+        "artifact_size": {"type": "integer", "minimum": 0}
+      }
+    },
+    "links": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pr": {"type": "integer", "minimum": 1},
+        "merge_commit": {"type": "string"},
+        "workflow_run": {"type": "integer", "minimum": 1}
+      }
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["created_at", "created_by", "immutable"],
+      "properties": {
+        "created_at": {"type": "string", "format": "date-time"},
+        "created_by": {"type": "string", "minLength": 1},
+        "immutable": {"const": true}
+      }
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "method": {"enum": ["cosign", "gpg"]},
+        "signature": {"type": "string"},
+        "signed_by": {"type": "string"}
+      }
+    }
+  }
+}
