@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.1",
+  "name": "GaaS Authority Non-Drift Policy",
+  "maintainer": "SangmuanValte",
+  "invariants": [
+    "Capability does not imply permission.",
+    "Outcome does not imply authority expansion.",
+    "Evidence does not itself authorize execution.",
+    "Authority changes require a valid governance transition."
+  ],
+  "authority_transition": {
+    "unchanged_without_valid_governance_transition": true,
+    "allowed_transitions": [
+      "MAINTAIN",
+      "CONSTRAIN",
+      "ESCALATE",
+      "REVOKE",
+      "EXPIRE",
+      "RENEW",
+      "EXPAND"
+    ]
+  },
+  "execution_boundary": {
+    "proposal_requires_authorization": true,
+    "fail_closed": true,
+    "evidence_required": true
+  }
+}
