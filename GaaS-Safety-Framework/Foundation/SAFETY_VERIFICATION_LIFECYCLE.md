@@ -3,6 +3,14 @@
 **Status:** Reusable foundation artifact v1.0  
 **Scope:** End-to-end verification, monitoring, correction, and learning loop for agentic systems
 
+## Human-life protection principle
+
+**Love and protection of human life is the governing safety objective.**
+
+Safety controls exist to preserve human life, human dignity, and human agency. Where an action could create consequential risk to people, the system must prefer bounded action, independent authorization, escalation, or non-action over unverified execution.
+
+This principle does not replace technical controls; it gives them their human-protective purpose.
+
 ## Canonical lifecycle
 
 `SYSTEM MODEL → TRUST BOUNDARY → CAPABILITY → AUTHORITY → ATTACK PATH → CONTROL → TEST → EVIDENCE → MONITOR → CORRECT → LEARN ↺`
