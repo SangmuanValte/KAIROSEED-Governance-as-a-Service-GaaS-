@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/SangmuanValte/KAIROSEED-Governance-as-a-Service-GaaS-/blob/main/GaaS-Safety-Framework/Foundation/agent-circumvention-test.schema.json",
+  "title": "KAIROSEED GaaS Agent Circumvention Test Record",
+  "description": "Reusable, reproducible record format for testing whether an agent respects governance boundaries after denial or constraint.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "test_id",
+    "threat_class",
+    "threat_model",
+    "initial_authority",
+    "intended_objective",
+    "intended_policy",
+    "action_request",
+    "governance_decision",
+    "expected_result",
+    "actual_result",
+    "integrity_checks",
+    "evidence",
+    "verdict",
+    "reproducibility",
+    "remediation"
+  ],
+  "properties": {
+    "schema_version": {"type": "string", "const": "1.0"},
+    "test_id": {"type": "string", "minLength": 1},
+    "threat_class": {
+      "enum": [
+        "C-01_POLICY_BYPASS",
+        "C-02_AUTHORITY_EXPANSION",
+        "C-03_PROVENANCE_MANIPULATION",
+        "C-04_APPROVAL_FORGERY",
+        "C-05_MEMORY_POISONING",
+        "C-06_AUDIT_BYPASS",
+        "C-07_CROSS_AGENT_EXPLOITATION",
+        "C-08_TRUSTED_TOOL_ABUSE"
+      ]
+    },
+    "threat_model": {"type": "string", "minLength": 1},
+    "initial_authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["agent_id", "delegation_id", "policy_version", "resource_scope"],
+      "properties": {
+        "agent_id": {"type": "string", "minLength": 1},
+        "delegation_id": {"type": "string", "minLength": 1},
+        "policy_version": {"type": "string", "minLength": 1},
+        "resource_scope": {"type": "array", "items": {"type": "string"}},
+        "allowed_actions": {"type": "array", "items": {"type": "string"}},
+        "valid_until": {"type": ["string", "null"], "format": "date-time"}
+      }
+    },
+    "intended_objective": {"type": "string", "minLength": 1},
+    "intended_policy": {"type": "string", "minLength": 1},
+    "action_request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["action", "resource"],
+      "properties": {
+        "action": {"type": "string", "minLength": 1},
+        "resource": {"type": "string", "minLength": 1},
+        "arguments_digest": {"type": "string"},
+        "requested_at": {"type": "string", "format": "date-time"}
+      }
+    },
+    "governance_decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decision", "decision_id", "reason"],
+      "properties": {
+        "decision": {"enum": ["ALLOW", "DENY", "ESCALATE", "REQUIRE_REVALIDATION"]},
+        "decision_id": {"type": "string", "minLength": 1},
+        "reason": {"type": "string", "minLength": 1},
+        "http_status": {"type": ["integer", "null"], "minimum": 100, "maximum": 599}
+      }
+    },
+    "attempt": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "occurred": {"type": "boolean"},
+        "description": {"type": "string"},
+        "route_type": {"enum": ["DIRECT", "ALTERNATIVE", "CROSS_AGENT", "TRUSTED_TOOL", "PROVENANCE", "AUDIT", "UNKNOWN", null]}
+      }
+    },
+    "execution_trace": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["step", "event", "result"],
+        "properties": {
+          "step": {"type": "integer", "minimum": 1},
+          "event": {"type": "string", "minLength": 1},
+          "result": {"type": "string", "minLength": 1},
+          "event_id": {"type": "string"}
+        }
+      }
+    },
+    "expected_result": {"type": "string", "minLength": 1},
+    "actual_result": {"type": "string", "minLength": 1},
+    "integrity_checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "protected_state_changed",
+        "authority_expanded",
+        "provenance_integrity_preserved",
+        "audit_integrity_preserved"
+      ],
+      "properties": {
+        "protected_state_changed": {"type": "boolean"},
+        "authority_expanded": {"type": "boolean"},
+        "provenance_integrity_preserved": {"type": "boolean"},
+        "audit_integrity_preserved": {"type": "boolean"}
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["event_ids", "artifact_ids"],
+      "properties": {
+        "event_ids": {"type": "array", "items": {"type": "string"}},
+        "artifact_ids": {"type": "array", "items": {"type": "string"}},
+        "trace_digest": {"type": "string"}
+      }
+    },
+    "verdict": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pass_fail", "severity"],
+      "properties": {
+        "pass_fail": {"enum": ["PASS", "FAIL", "INCONCLUSIVE"]},
+        "severity": {"enum": ["NONE", "LOW", "MEDIUM", "HIGH", "CRITICAL"]},
+        "rationale": {"type": "string"}
+      }
+    },
+    "reproducibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["environment", "policy_version", "repeat_count", "deterministic_decision_expected"],
+      "properties": {
+        "environment": {"type": "string", "minLength": 1},
+        "runtime_version": {"type": "string"},
+        "model_id": {"type": "string"},
+        "policy_version": {"type": "string", "minLength": 1},
+        "repeat_count": {"type": "integer", "minimum": 1},
+        "deterministic_decision_expected": {"type": "boolean"},
+        "seed": {"type": ["integer", "null"]}
+      }
+    },
+    "remediation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required", "regression_test"],
+      "properties": {
+        "required": {"type": "boolean"},
+        "description": {"type": "string"},
+        "regression_test": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}
