@@ -1,0 +1,1306 @@
+{
+  "version": "1.0",
+  "count": 50,
+  "sandboxes": [
+    {
+      "sandbox_id": "astra-sbx-0001",
+      "agent_id": "agent-0001",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0001",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0002",
+      "agent_id": "agent-0002",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0002",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0003",
+      "agent_id": "agent-0003",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0003",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0004",
+      "agent_id": "agent-0004",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0004",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0005",
+      "agent_id": "agent-0005",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0005",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0006",
+      "agent_id": "agent-0006",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0006",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0007",
+      "agent_id": "agent-0007",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0007",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0008",
+      "agent_id": "agent-0008",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0008",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0009",
+      "agent_id": "agent-0009",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0009",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0010",
+      "agent_id": "agent-0010",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0010",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0011",
+      "agent_id": "agent-0011",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0011",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0012",
+      "agent_id": "agent-0012",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0012",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0013",
+      "agent_id": "agent-0013",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0013",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0014",
+      "agent_id": "agent-0014",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0014",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0015",
+      "agent_id": "agent-0015",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0015",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0016",
+      "agent_id": "agent-0016",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0016",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0017",
+      "agent_id": "agent-0017",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0017",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0018",
+      "agent_id": "agent-0018",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0018",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0019",
+      "agent_id": "agent-0019",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0019",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0020",
+      "agent_id": "agent-0020",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0020",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0021",
+      "agent_id": "agent-0021",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0021",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0022",
+      "agent_id": "agent-0022",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0022",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0023",
+      "agent_id": "agent-0023",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0023",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0024",
+      "agent_id": "agent-0024",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0024",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0025",
+      "agent_id": "agent-0025",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0025",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0026",
+      "agent_id": "agent-0026",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0026",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0027",
+      "agent_id": "agent-0027",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0027",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0028",
+      "agent_id": "agent-0028",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0028",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0029",
+      "agent_id": "agent-0029",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0029",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0030",
+      "agent_id": "agent-0030",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0030",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0031",
+      "agent_id": "agent-0031",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0031",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0032",
+      "agent_id": "agent-0032",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0032",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0033",
+      "agent_id": "agent-0033",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0033",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0034",
+      "agent_id": "agent-0034",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0034",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0035",
+      "agent_id": "agent-0035",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0035",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0036",
+      "agent_id": "agent-0036",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0036",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0037",
+      "agent_id": "agent-0037",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0037",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0038",
+      "agent_id": "agent-0038",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0038",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0039",
+      "agent_id": "agent-0039",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0039",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0040",
+      "agent_id": "agent-0040",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0040",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0041",
+      "agent_id": "agent-0041",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0041",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0042",
+      "agent_id": "agent-0042",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0042",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0043",
+      "agent_id": "agent-0043",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0043",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0044",
+      "agent_id": "agent-0044",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0044",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0045",
+      "agent_id": "agent-0045",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0045",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0046",
+      "agent_id": "agent-0046",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0046",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0047",
+      "agent_id": "agent-0047",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0047",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0048",
+      "agent_id": "agent-0048",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0048",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0049",
+      "agent_id": "agent-0049",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0049",
+      "audit_id": null
+    },
+    {
+      "sandbox_id": "astra-sbx-0050",
+      "agent_id": "agent-0050",
+      "capabilities": [],
+      "data_scope": [],
+      "tool_scope": [],
+      "resource_quota": {
+        "cpu": "bounded",
+        "memory_mb": 1024,
+        "storage_mb": 512,
+        "execution_seconds": 300
+      },
+      "network_boundary": {
+        "mode": "isolated",
+        "allowed_destinations": []
+      },
+      "authority_scope": {
+        "status": "none",
+        "scope": [],
+        "authorization_id": null
+      },
+      "expiration": null,
+      "parent_action_id": null,
+      "correlation_id": "astra-run-0050",
+      "audit_id": null
+    }
+  ]
+}
