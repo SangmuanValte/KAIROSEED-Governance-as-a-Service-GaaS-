@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/SangmuanValte/KAIROSEED-Governance-as-a-Service-GaaS-/blob/main/schemas/astra-sandbox-identity.schema.json",
+  "title": "ASTRA Sandbox Identity",
+  "description": "Identity and bounded execution context for an ASTRA sandbox. Sandbox identity does not itself grant consequential authority.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["sandbox_id","agent_id","capabilities","data_scope","tool_scope","resource_quota","network_boundary","authority_scope","expiration","parent_action_id","correlation_id","audit_id"],
+  "properties": {
+    "sandbox_id": {"type":"string","pattern":"^astra-sbx-[0-9]{4}$"},
+    "agent_id": {"type":"string","pattern":"^agent-[0-9]{4}$"},
+    "capabilities": {"type":"array","items":{"type":"string"},"uniqueItems":true},
+    "data_scope": {"type":"array","items":{"type":"string"},"uniqueItems":true},
+    "tool_scope": {"type":"array","items":{"type":"string"},"uniqueItems":true},
+    "resource_quota": {"type":"object","additionalProperties":false,"properties":{"cpu":{"type":"string"},"memory_mb":{"type":"integer","minimum":0},"storage_mb":{"type":"integer","minimum":0},"execution_seconds":{"type":"integer","minimum":1}}},
+    "network_boundary": {"type":"object","additionalProperties":false,"required":["mode"],"properties":{"mode":{"enum":["isolated","egress-allowlist","restricted","none"]},"allowed_destinations":{"type":"array","items":{"type":"string"},"uniqueItems":true}}},
+    "authority_scope": {"type":"object","additionalProperties":false,"required":["status"],"properties":{"status":{"enum":["none","bounded","pending","revoked"]},"scope":{"type":"array","items":{"type":"string"},"uniqueItems":true},"authorization_id":{"type":["string","null"]}}},
+    "expiration": {"type":["string","null"],"format":"date-time"},
+    "parent_action_id": {"type":["string","null"]},
+    "correlation_id": {"type":"string","minLength":1},
+    "audit_id": {"type":["string","null"]}
+  }
+}
