@@ -59,3 +59,9 @@ Serve the repository with any static HTTP server and open `webmcp/index.html` in
 ### Invariant
 
 > Capability does not imply permission. Authorization precedes execution. Execution produces evidence.
+
+## ASTRA production prototype
+
+The main application is an ASTRA Agent Governance control-plane prototype. It demonstrates the governed action path: agent → tool request → policy evaluation → ALLOW / DENY / APPROVAL_REQUIRED → evidence.
+
+The prototype includes an authorization API at `POST /api/v1/authorize`, an agent registry, fail-closed policy evaluation, evidence trace, and authority revocation UI. It is simulation-safe and does not execute external production actions.
