@@ -65,3 +65,33 @@ Serve the repository with any static HTTP server and open `webmcp/index.html` in
 The main application is an ASTRA Agent Governance control-plane prototype. It demonstrates the governed action path: agent → tool request → policy evaluation → ALLOW / DENY / APPROVAL_REQUIRED → evidence.
 
 The prototype includes an authorization API at `POST /api/v1/authorize`, an agent registry, fail-closed policy evaluation, evidence trace, and authority revocation UI. It is simulation-safe and does not execute external production actions.
+
+
+### Grok Bot integration
+
+ASTRA now exposes a governed Grok Bot adapter at `POST /api/v1/grok/send`.
+
+The integration keeps Grok Bot behind the ASTRA authorization boundary:
+
+```text
+GROK REQUEST
+    ↓
+ASTRA IDENTITY / POLICY / RISK
+    ↓
+ALLOW / DENY / APPROVAL_REQUIRED
+    ↓
+GROK BOT GATEWAY
+    ↓
+DELIVERY EVIDENCE
+```
+
+The adapter supports `agent-grok` with `grok_message` and `grok_thread` capabilities. Production execution is approval-gated. Missing Grok gateway credentials fail closed; an uncertain delivery is never silently retried.
+
+Configure only server-side environment variables:
+
+- `GROK_BOT_GATEWAY_URL`
+- `GROK_BOT_GATEWAY_TOKEN`
+
+The gateway token is never returned to the client.
+
+The upstream `grok-bot-cli` project provides the `gbot` CLI and Grok Bot gateway integration, including `sendPrompt` and delivery receipts. ASTRA treats that capability as an execution target rather than an authority source.
