@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "source": {
+    "repository": "ripienaar/free-for-dev",
+    "branch": "master",
+    "commit": "4197e303b0d35ce3c844af3fb05d7d9d8fde215d",
+    "snapshot_date": "2026-09-25"
+  },
+  "capabilities": [
+    {"id":"CAP-MONITORING","source_pr":"4894","domain":"monitoring","signals":["heartbeat monitoring","alerts"]},
+    {"id":"CAP-CODE-QUALITY","source_pr":"4883","domain":"code_quality","signals":["automated code review"]},
+    {"id":"CAP-FAULT-SIMULATION","source_pr":"4899","domain":"api_testing","signals":["delays","errors","failed requests","malformed responses"]},
+    {"id":"CAP-SECURITY","source_pr":"4891","domain":"security","signals":["browser-only password generation"],"status":"source_pr_not_merged"},
+    {"id":"CAP-LLM-API","source_pr":"4882","domain":"generative_ai","signals":["OpenAI-compatible API","free model tier"],"status":"source_pr_not_merged"}
+  ]
+}
