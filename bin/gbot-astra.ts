@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 import { randomUUID } from "crypto";
-import { gbotSend } from "../lib/grok-bot";
-
 const [target, ...promptParts] = process.argv.slice(2);
 const prompt = promptParts.join(" ").trim();
 
