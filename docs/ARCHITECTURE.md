@@ -171,3 +171,65 @@ The suite should be treated as **implementation-level verification evidence unde
 **More capability requires more explicit governance.**
 
 **Define -> Enforce -> Falsify -> Evidence.**
+
+## Governed Autonomy
+
+**Governed Autonomy** is the architectural principle that an AI system may expand its capability and autonomy without automatically expanding its authority to take consequential action.
+
+### Canonical chain
+
+```
+AI Capability
+    → Agentic Capability
+    → Consequential Action
+    → Authorization
+    → Execution
+    → Verification
+    → Evidence
+```
+
+### Core invariant
+
+```
+Capability ↑  does not imply  Authority ↑
+```
+
+Autonomous operation therefore remains inside an explicit governance boundary. Consequential execution must be attributable to an authorization decision and produce inspectable evidence.
+
+### Execution boundary
+
+```
+        AI / AGENT
+            │
+       Capability
+            ↓
+        Proposal
+            ↓
+       Governance
+            ↓
+      Authorization
+            │
+       ┌────┴────┐
+       │         │
+     DENY       ALLOW
+       │         │
+      BLOCK      ↓
+              EXECUTE
+                 │
+                 ↓
+             VERIFY
+                 │
+                 ↓
+              EVIDENCE
+```
+
+### Evidence status
+
+Governed Autonomy is a **KAIROSEED architectural principle/proposal**. It is not presented as a universal theorem, formal proof, production certification, or security guarantee.
+
+> **Governed Autonomy:** autonomy is permitted to operate within an explicit authorization and enforcement boundary; increased capability does not constitute increased authority, and consequential execution must remain attributable to an authorization decision and produce inspectable evidence.
+
+**Capability ≠ Permission.**  
+**Autonomy ≠ Authority.**  
+**Execution ≠ Evidence.**  
+**Evidence ≠ Authorization.**
