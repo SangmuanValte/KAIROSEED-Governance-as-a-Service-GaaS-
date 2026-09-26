@@ -1,10 +1,10 @@
 # KAIROSEED — Research Abstract
 
-## Research Hypothesis
+## 1. Research Hypothesis
 
 We hypothesize that governance violations in distributed capability systems can arise when verification (V) is separated from the state-transition function f, and that incorporating verification directly into the transition function can constrain unauthorized state transitions under specified conditions.
 
-## Formal Model / Invariant
+## 2. Formal Model / Invariant
 
 f(S_t, ΔS) = S_{t+1} iff V(S_t, ΔS)
 
@@ -16,7 +16,7 @@ The target invariant is:
 
 These conditions define the model under which the implementation is evaluated. They are not a universal safety theorem or guarantee.
 
-## Implementation
+## 3. Implementation
 
 The experimental implementation uses the Selah Core WASM runtime, JIREH validator, and a deterministic audit ledger within the simulation framework.
 
@@ -28,7 +28,7 @@ The architecture maintains the distinction:
 
 Capability ≠ Authorization ≠ Execution ≠ Verification.
 
-## Verification Tests
+## 4. Verification Tests
 
 The verification suite includes:
 
@@ -45,7 +45,7 @@ For the reported configuration, failed verification produced HELD or BLOCKED, wi
 
 The strongest falsifier is an independently observed protected-state mutation causally attributable to a denied proposal within the defined observation horizon.
 
-## Empirical Observation
+## 5. Empirical Observation
 
 For seed 108, the Collatz-inspired trace is:
 
@@ -67,7 +67,7 @@ The control abstraction
 
 is a KAIROSEED verification-cycle metaphor, not a Collatz trajectory. Here, 0 denotes the measured governance condition of zero observed bypass / SES = 0, not a Collatz state.
 
-## Evidence
+## 6. Evidence
 
 The experimental artifact is intended to be independently reproducible from its recorded receipt chain and deterministic configuration.
 
@@ -77,7 +77,13 @@ Example reproduction:
 
 The resulting receipt_chain.json records chained evidence associated with the tested transitions. Receipts are evidence artifacts; they are not, by themselves, mathematical proof of protected-state immutability.
 
-## Claim Boundary
+The receipt chain is of the form:
+
+H(hash_prev || action || GAT || result)
+
+and is used to support reconstruction and verification of the recorded execution evidence within the artifact scope.
+
+## 7. Claim Boundary
 
 The experiments provide empirical evidence that the inline-verification pattern can be implemented and exercised within the defined artifact scope.
 
@@ -95,13 +101,9 @@ Research Hypothesis → Formal Model / Invariant → Implementation → Verifica
 
 Formal proof, implementation verification, and empirical validation remain distinct.
 
-## Be-Still Condition
-
-The governing condition is expressed as:
+Within the explicitly defined model and artifact semantics, the governing condition is expressed as:
 
 S_{t+1} = 1 iff V_inline
-
-only within the explicitly defined model and artifact semantics.
 
 The receipt is the evidence. The claim remains bounded by what the receipt and independent observation establish.
 
