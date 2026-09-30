@@ -1,0 +1,20 @@
+# Illustrative policy configuration.
+# STATUS: EXAMPLE ONLY — the current ASTRA reference implementation does not
+# load this YAML file directly.
+
+version: "example/v0"
+allowed_actors:
+  - "agent-1"
+allowed_capabilities:
+  - "document.read"
+allowed_actions:
+  - "read"
+allowed_resources:
+  - "local-demo"
+authority_scope:
+  environment: "sandbox"
+resource_limits:
+  bytes: 1024
+
+# Production deployments must define their authoritative policy loader,
+# version binding, identity source, expiry/revocation semantics, and audit policy.
