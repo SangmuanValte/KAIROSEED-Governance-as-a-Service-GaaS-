@@ -1,133 +1,235 @@
-# KAIROSEED-Governance-as-a-Service-GaaS-
+# KAIROSEED Governance-as-a-Service (GaaS)
 
-Governance-as-a-Service (GaaS): Define, enforce, and prove delegated authority for AI agents through executable policies, authorization, runtime governance, and verifiable audit trails.
+Verification-first reference architecture for governing consequential actions by AI agents.
 
 > **Capability is not permission.**
+>
+> **Authorization is not execution.**
+>
+> **Execution is not evidence.**
+>
+> **A passing test is evidence under tested conditions, not a universal security guarantee.**
 
-> **Boundary: this is a reference adapter, not proof of a production deployment.**
+## Release status
 
-## Verification-first execution adapter
+**Release-preparation branch:** `release/verification-first-v0.1`
 
-KAIROSEED makes the transition from agent capability to consequential execution explicit and testable.
+This repository currently contains **reference implementations and research artifacts**. It is not a production-certified authorization service.
+
+| Area | Status | Evidence boundary |
+|---|---|---|
+| ASTRA deterministic policy evaluation | **CONFIRMED IMPLEMENTED** | `astra/core.py` + `tests/test_core.py` |
+| ASTRA governed drone simulator | **CONFIRMED IMPLEMENTED** | `drone_simulator/` + `tests/test_drone_simulator.py` |
+| TypeScript claim/execution adapter | **CONFIRMED IMPLEMENTED** | `src/kairoseed.ts` |
+| Authorization-before-callback behavior in TypeScript adapter | **IMPLEMENTATION CLAIM — TEST COVERAGE REQUIRED** | Source inspection; dedicated automated suite is a release requirement |
+| Adversarial authorization-boundary tests | **CONFIRMED IMPLEMENTED IN RELEASE PREP** | `tests/adversarial/` |
+| Independent verification of real external side effects | **PLANNED / UNVERIFIED** | No production executor or independent verifier is established here |
+| Durable, tamper-resistant evidence | **PLANNED / UNVERIFIED** | In-memory evidence is reference-only |
+| Concurrency-safe single-use authorization | **UNVERIFIED / KNOWN LIMITATION** | Current TypeScript and Python reference paths do not establish atomic consumption |
+| Production identity, deployment admission, rollback, and supply-chain controls | **PLANNED / UNVERIFIED** | Deployment-specific |
+
+Do not read a **PLANNED**, **UNVERIFIED**, or **KNOWN LIMITATION** item as implemented.
+
+## Purpose
+
+KAIROSEED separates:
 
 ```
-Agent
-  ↓
-Adapter
-  ↓
-Policy / Authorization
-  ↓
-Execution Gate
-  ↓
-Tool
-  ↓
-Verification
-  ↓
+Agent capability
+      ↓
+Proposal / request
+      ↓
+Policy + authorization
+      ↓
+Execution gate
+      ↓
+Consequential operation
+      ↓
+Independent verification
+      ↓
 Evidence
 ```
 
-Core reference flow:
+The central design requirement is that **the component that can perform an action must not be the sole authority deciding that the action is permitted**.
+
+The repository demonstrates this boundary with deterministic policy evaluation and simulated execution. Production integrations must place an enforcement point immediately before the actual consequential side effect.
+
+## Trust model
+
+The reference model treats:
+
+- the **agent/model** as a proposer, not an authority;
+- **policy/authorization** as the source of permission;
+- the **execution gate** as the enforcement boundary;
+- the **executor/tool** as capable of causing the side effect;
+- **verification/evidence** as a separate observation path.
+
+Trust is therefore explicit and bounded:
 
 ```
-Capability → Authorization → Enforcement → Execution → Verification → Evidence
+Capability ≠ Permission ≠ Authorization ≠ Execution ≠ Evidence
 ```
 
-## Repository artifacts
+A policy decision is not evidence that the side effect occurred. An observed side effect is not evidence that it was authorized.
 
-- `src/kairoseed.ts` — TypeScript reference adapter
-- `docs/ADAPTER.md` — adapter contracts and production-boundary notes
-- `docs/EVIDENCE.md` — evidence schema and independent-observer procedure
-- `docs/THREAT_MODEL.md` — eight adversarial execution-boundary cases
+## Authorization boundary
 
-## 20-second demo
+A request is eligible to execute only when all required authorization predicates hold.
+
+For the ASTRA reference implementation:
+
+- actor is allowed;
+- capability is allowed;
+- action is allowed;
+- resource is allowed;
+- authorization is not expired;
+- requested scope is contained by authority scope;
+- requested resources remain within limits;
+- required purpose is present;
+- review-only actions do not become automatic execution.
+
+If any mandatory predicate fails, ASTRA returns **BLOCK**.
+
+The TypeScript adapter additionally checks claim state, expiry, policy-version binding, subject/action/scope binding, and optional parameter binding before invoking the tool callback.
+
+## Core invariants
+
+### I1 — Capability does not imply permission
+
+A capability alone cannot produce an authorization decision.
+
+### I2 — No authorization, no governed execution
+
+A request lacking valid authority must be blocked before the governed execution callback.
+
+### I3 — Scope cannot expand through the request
 
 ```
-ACTIVE claim
-    ↓
-ALLOW / EXECUTED
-    ↓
-revoke claim
-    ↓
-same request
-    ↓
-DENY / BLOCKED
-    ↓
-inspect evidence
+requested_scope ⊆ authority_scope
 ```
 
-Question:
+### I4 — Expired authority is invalid
 
-> **Can you try to break it?**
+An authorization outside its validity window cannot authorize execution.
 
-## Evidence bundle
+### I5 — Review is not allow
 
-For a deployment-backed implementation, retain raw evidence:
+`REVIEW` is a non-execution state in the reference model.
+
+### I6 — Evidence does not retroactively authorize
+
+An audit record is evidence of what was recorded; it does not create permission.
+
+### I7 — Fail closed at mandatory authorization boundaries
+
+Missing, invalid, expired, or unverifiable mandatory authorization is a block condition.
+
+These are **implementation-level invariants under the stated test conditions**, not universal security theorems.
+
+## Verification approach
+
+KAIROSEED uses:
+
+**Claim → Implementation → Test → Observation → Evidence → Bounded claim**
+
+Verification is split into:
+
+1. **Unit tests** — deterministic policy predicates.
+2. **Adversarial tests** — deliberate boundary substitutions and invalid authorization.
+3. **Execution tests** — demonstrate that governed simulation state changes only after an allow decision.
+4. **Independent verification** — planned for production integrations and must be outside the proposing agent's control.
+
+Run the reference Python suite:
 
 ```bash
-mkdir -p evidence
-
-psql "$DB_URL" -c "
-SELECT * FROM governance_events
-ORDER BY created_at DESC LIMIT 100;
-" > evidence/governance_events.txt
-
-psql "$DB_URL" -c "
-SELECT * FROM authorization_decisions
-ORDER BY created_at DESC LIMIT 100;
-" > evidence/authorization_decisions.txt
-
-psql "$DB_URL" -c "
-SELECT * FROM executions
-ORDER BY created_at DESC LIMIT 100;
-" > evidence/executions.txt
+python -m pytest -q
 ```
 
-If an invariant/health endpoint exists:
+Run adversarial tests explicitly:
 
 ```bash
-curl -s "$HEALTH_URL" | jq > evidence/invariants_snapshot.json
+python -m pytest -q tests/adversarial
 ```
 
-Record implementation version, database/migration version, fixture version, timestamps, and test commands alongside the raw outputs.
+TypeScript compilation/build is a separate repository concern because the current repository does not yet contain a pinned npm lockfile for reproducible dependency installation.
 
-## Epistemic boundary
+## Example
 
-```
-Research Hypothesis
-        ↓
-Formal Model / Invariant
-        ↓
-Implementation
-        ↓
-Verification Tests
-        ↓
-Empirical Observation
-        ↓
-Evidence
-        ↓
-Claim
+Authorized:
+
+```text
+actor=agent-1
+capability=compute
+action=mine
+resource=worker-1
+scope.environment=authorized
+cpu=2
+→ ALLOW
 ```
 
-A passing test demonstrates behavior under the tested conditions. It does not establish a universal security guarantee.
+Unauthorized scope expansion:
 
-An inaccessible artifact is `UNVERIFIED`, not automatically `FAIL`.
+```text
+same authorization
+scope.environment=untrusted
+→ BLOCK
+reason=scope_outside_authority
+```
 
-> **Unknown ≠ False.**
+The critical property is not the text of the decision. The test must establish that the consequential callback/state transition is not performed on the blocked path.
 
-## Production boundary
+See `examples/authorized_unauthorized.py`.
 
-The in-memory stores are reference implementations. Production integrations should add authoritative persistence and appropriate controls for concurrency, single-use consumption, replay prevention, identity/scope binding, policy-version binding, append-only evidence, execution isolation, and independent verification.
+## Failure handling
 
-The repository does not claim that these controls are universally sufficient.
+Mandatory authorization failures are fail-closed in the ASTRA evaluator.
 
-## Existing GaaS foundation
+Known reference limitations remain:
 
-The repository also contains `GaaS-Safety-Framework/Foundation/`, including the Agent Circumvention Test artifacts and WebMCP prototype.
+- in-memory state is not durable;
+- claim consumption is not proven atomic under concurrency;
+- evidence is not an immutable ledger;
+- the reference evaluator does not itself isolate arbitrary tools;
+- no production identity provider is assumed;
+- no universal guarantee is claimed for integration boundaries.
 
-Core invariant:
+## Repository map
 
-> **Capability ≠ Permission.**
+```text
+astra/                  Confirmed Python authorization reference
+src/                    TypeScript reference adapter
+drone_simulator/        Simulated consequential execution
+tests/                  Verification tests
+tests/adversarial/      Adversarial boundary tests
+examples/               Reproducible reference examples
+docs/                   Architecture, security, verification, operations
+governance/             Governance/reference boundary artifacts
+evidence/               Evidence fixtures/artifacts; not a production ledger
+planned/                Explicitly unimplemented future work
+.github/workflows/      CI/release verification
+```
 
-For denied actions:
+See `docs/RELEASE_STATUS.md` for the detailed evidence matrix.
 
-`DENY → NO AUTHORIZATION → NO EXECUTION → EVIDENCE`
+## What this release does not claim
+
+This release does **not** claim:
+
+- production security certification;
+- complete mediation of every tool or integration;
+- cryptographic attestation of arbitrary execution;
+- tamper-proof evidence storage;
+- concurrency-safe single-use authorization;
+- immunity to compromised infrastructure;
+- absence of bypasses outside tested paths;
+- a universal proof of the stated invariants.
+
+## Release principle
+
+```text
+DESIGN → BUILD → VERIFY → PUBLISH
+```
+
+Public claims must track implementation evidence. If an artifact cannot be reproduced or inspected, mark it **UNVERIFIED** rather than silently treating it as true or false.
+
+**Unknown ≠ False.**
