@@ -1,83 +1,55 @@
-# KAIROSEED Threat Model
+# Threat Model
 
-> **Boundary: this is a reference adapter, not proof of a production deployment.**
+The authorization-to-execution boundary is the primary security boundary of the reference system.
 
-The following eight adversarial cases target the authorization-to-execution boundary.
-
-| # | Attempt | Expected result |
+| Threat | Expected control | Current status |
 |---|---|---|
-| 1 | Missing claim | `BLOCKED: claim_not_found` |
-| 2 | Revoked claim | `BLOCKED: claim_revoked` |
-| 3 | Expired claim | `BLOCKED: claim_expired` |
-| 4 | Subject substitution | `BLOCKED: policy_denied` |
-| 5 | Action substitution | `BLOCKED: policy_denied` |
-| 6 | Scope substitution | `BLOCKED: policy_denied` |
-| 7 | Parameter substitution | `BLOCKED: params_hash_mismatch` |
-| 8 | Single-use replay | `BLOCKED: claim_used` after successful consumption |
+| Capability confused with authority | Explicit authorization | CONFIRMED in reference evaluator |
+| Actor substitution | Actor binding | CONFIRMED |
+| Capability substitution | Capability binding | CONFIRMED |
+| Action substitution | Action binding | CONFIRMED |
+| Resource substitution | Resource binding | CONFIRMED |
+| Scope expansion | Scope containment | CONFIRMED |
+| Expired authority | Time check | CONFIRMED |
+| Review bypass | REVIEW remains non-allow | CONFIRMED at evaluator |
+| Parameter substitution | Parameter hash binding | IMPLEMENTED in TS; automated TS evidence pending |
+| Sequential replay | Single-use claim state | IMPLEMENTED sequentially |
+| Concurrent replay | Atomic consumption | UNVERIFIED |
+| Direct tool bypass | Complete mediation | UNVERIFIED |
+| Policy-service compromise | Independent policy trust root | UNVERIFIED |
+| Evidence tampering | Durable integrity controls | UNVERIFIED |
+| Identity compromise | External identity controls | UNVERIFIED |
+| Dependency compromise | Pinned/audited supply chain | UNVERIFIED |
+| Sensitive data exposure | Secret/data handling controls | UNVERIFIED |
+| Serialization disagreement | Canonical request representation | Partially addressed; integration-specific |
+| Partial execution | Transaction/compensation semantics | UNVERIFIED |
 
-## 1. Missing claim
+## Adversarial principle
 
-Submit an execution request with an unknown claim identifier.
-
-Expected:
-
-```
-BLOCKED
-reason = claim_not_found
-```
-
-## 2. Revoked claim
-
-Change an active claim to `REVOKED`, then repeat the same request.
-
-Expected:
+Do not only test:
 
 ```
-BLOCKED
-reason = claim_revoked
+valid request → ALLOW
 ```
 
-## 3. Expired claim
-
-Use a claim whose expiration time has passed.
-
-Expected:
+Test mutations:
 
 ```
-BLOCKED
-reason = claim_expired
+valid request
+  → change actor
+  → change capability
+  → change action
+  → change resource
+  → expand scope
+  → exceed resource limit
+  → expire authorization
+  → request review-only action
+  → mutate parameters
+  → replay authorization
 ```
 
-## 4–6. Substitution attacks
+Each mutation should produce the expected boundary behavior and, where execution is simulated, prove protected state did not change.
 
-Change the subject, action, or scope while keeping the authorization claim unchanged.
+## Release boundary
 
-Expected:
-
-```
-BLOCKED
-reason = policy_denied
-```
-
-## 7. Parameter substitution
-
-Supply parameters whose deterministic SHA-256 differs from the claim's `paramsHash`.
-
-Expected:
-
-```
-BLOCKED
-reason = params_hash_mismatch
-```
-
-## 8. Single-use replay
-
-A `singleUse` claim should transition to `USED` after successful execution.
-
-A later attempt should be rejected.
-
-**Concurrency warning:** the in-memory reference implementation does not atomically consume claims. Production implementations require transactional consumption or equivalent concurrency control.
-
-## Out of scope
-
-This fixture set is not exhaustive. Production threat models may additionally require controls for direct tool bypass, compromised identities, policy-service compromise, replay across workers, stale authorization, database privilege escalation, side channels, runtime compromise, serialization disagreement, and evidence-store compromise.
+This threat model is a test plan, not evidence that every threat is solved. Threats marked **UNVERIFIED** remain release risks and must not be converted into security claims.
