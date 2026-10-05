@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#071b2d">
+<title>KAIROSEED â€” Evidence-Driven Deployment Console</title>
+<style>
+:root{
+  --bg:#061522;--panel:#0e2234;--panel2:#122a3f;--line:#2a526e;--text:#e9f6ff;
+  --muted:#a8bfd0;--blue:#76b8ff;--green:#70e6ae;--gold:#ffd274;--violet:#a99cff;
+  --red:#ff9090;--cyan:#83e7ef;--ink:#041019;--shadow:0 18px 50px #0006;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:
+ radial-gradient(circle at 85% 5%,#143c6d66 0,transparent 30rem),
+ radial-gradient(circle at 5% 30%,#0d604955 0,transparent 35rem),
+ var(--bg);color:var(--text);font:15px/1.48 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+a{color:var(--cyan)}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.shell{max-width:1500px;margin:auto;padding:18px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px 0 18px;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:16px;min-width:0}
+.mark{width:56px;height:56px;border-radius:16px;background:linear-gradient(145deg,#d7edff,#70b7ff 45%,#7af0bd);color:#05233b;display:grid;place-items:center;font-weight:950;font-size:23px;box-shadow:var(--shadow)}
+.brand h1{margin:0;font-size:clamp(1.25rem,2.4vw,2rem);letter-spacing:.02em}
+.brand p{margin:2px 0 0;color:var(--muted);font-size:.82rem}
+.rule{border:1px solid #4b7ca5;border-radius:12px;padding:10px 14px;color:#dcecff;background:#0d2439aa;font-size:.82rem}
+.rule strong{display:block;color:white}
+.hero{padding:26px 0 14px}
+.eyebrow{color:var(--cyan);font-size:.72rem;letter-spacing:.17em;font-weight:900;text-transform:uppercase}
+.hero h2{font-size:clamp(2rem,4.6vw,4.4rem);line-height:1.02;margin:9px 0 12px;max-width:1000px}
+.hero p{color:var(--muted);max-width:900px;font-size:1.04rem}
+.pipeline{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:20px 0}
+.stage{position:relative;border:1px solid var(--line);border-radius:16px;padding:17px;min-height:190px;background:linear-gradient(145deg,#0f273b,#0b1e30)}
+.stage:nth-child(1){box-shadow:inset 0 3px 0 #4da5ff}
+.stage:nth-child(2){box-shadow:inset 0 3px 0 #45d894}
+.stage:nth-child(3){box-shadow:inset 0 3px 0 #ffc14d}
+.stage:nth-child(4){box-shadow:inset 0 3px 0 #9e89ff}
+.stage:nth-child(5){box-shadow:inset 0 3px 0 #ff7474}
+.num{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#163d5e;color:#fff;font-weight:900;margin-bottom:12px}
+.stage h3{margin:0 0 8px;font-size:1rem}.stage p{color:var(--muted);font-size:.82rem;margin:0}
+.code{font:12px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;background:#06131f;border:1px solid #28475d;border-radius:9px;padding:9px 10px;margin-top:12px;overflow:auto;white-space:pre-wrap}
+.grid{display:grid;grid-template-columns:1.1fr 1fr 1fr 1.2fr;gap:12px;margin:14px 0}
+.panel{background:linear-gradient(145deg,#10263a,#0b1d2e);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 12px 28px #0002}
+.panel-head{padding:10px 14px;background:#12324c;border-bottom:1px solid var(--line);font-size:.77rem;letter-spacing:.07em;font-weight:900}
+.panel-body{padding:14px}
+.panel h3{font-size:1rem;margin:0 0 8px}.small{font-size:.78rem;color:var(--muted)}
+.steps{display:grid;gap:8px}.step{border:1px solid #31546c;border-radius:10px;padding:10px 11px;background:#0b2032}.step b{font-size:.8rem}
+.checks{display:grid;gap:7px;margin-top:10px}.check{display:flex;gap:8px;align-items:flex-start;font-size:.79rem}.dot{width:18px;height:18px;flex:0 0 18px;border-radius:50%;display:grid;place-items:center;background:#174831;color:#8dffc2;font-size:12px}
+table{width:100%;border-collapse:collapse;font-size:.69rem}th,td{border:1px solid #31526a;padding:7px;vertical-align:top}th{background:#133149;text-align:left;color:#dcefff}
+.flow{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:12px}.flow .node{border:1px solid #355873;border-radius:12px;padding:11px;background:#0d2234;text-align:center;font-size:.75rem}.flow strong{display:block;margin-bottom:4px}
+.life{display:flex;gap:0;margin-top:10px;overflow:hidden;border-radius:10px;border:1px solid var(--line)}.life span{flex:1;text-align:center;padding:9px 5px;font-size:.72rem;font-weight:800}.life span:nth-child(1){background:#6337a7}.life span:nth-child(2){background:#2971b1}.life span:nth-child(3){background:#1a8ba8}.life span:nth-child(4){background:#21835d}.life span:nth-child(5){background:#bd8c20}.life span:nth-child(6){background:#9c2f3f}
+.console{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+textarea{width:100%;min-height:330px;background:#071725;color:#eaf6ff;border:1px solid #355873;border-radius:12px;padding:12px;font:12px/1.5 ui-monospace,Consolas,monospace;resize:vertical}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin:10px 0}
+.btn{border:1px solid #44728d;background:#16364b;color:#eaffff;border-radius:10px;padding:9px 13px;font-weight:800}.btn.primary{background:var(--green);color:#052a22;border:0}.btn.warn{border-color:#aa7e2a;color:#ffe6a7}
+.result{border-radius:12px;border:1px solid #355873;padding:12px;background:#0b2030;min-height:100px}
+.result.pass{border-color:#2f9668;background:#0c3328}.result.fail{border-color:#a14a4a;background:#3a1919}
+.statusbar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.pill{border:1px solid #3d6179;border-radius:99px;padding:6px 9px;font-size:.7rem;color:var(--muted)}.pill.good{border-color:#2f9668;color:#92f5bd}.pill.bad{border-color:#a14a4a;color:#ffaaaa}
+footer{margin-top:22px;padding:18px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.74rem;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media(max-width:1150px){.pipeline{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr 1fr}.flow{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:720px){.shell{padding:12px}.top{align-items:flex-start}.rule{display:none}.pipeline,.grid,.console{grid-template-columns:1fr}.flow{grid-template-columns:1fr 1fr}.life{display:grid;grid-template-columns:1fr 1fr}.hero h2{font-size:2.2rem}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="top">
+  <div class="brand"><div class="mark">K</div><div><h1>KAIROSEED</h1><p>Evidence-Driven Deployment Console Â· v1.0 prototype</p></div></div>
+  <div class="rule"><strong>Claim â‰¤ Evidence â‰¤ Established Scope</strong>Mechanics over memory. No belief-based promotion.</div>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">Implementation â†’ Evidence â†’ Registry â†’ Authorized Promotion</div>
+  <h2>Build only what the evidence can support.</h2>
+  <p>This console turns the deployment infographic into an executable local prototype. It demonstrates receipt structure and policy checks only. It does not cryptographically attest a verifier, prove ledger durability, or authorize production deployment.</p>
+</section>
+
+<section class="pipeline">
+  <article class="stage"><div class="num">1</div><h3>Implementation</h3><p>Component code, configuration, tests, and a declared run command.</p><div class="code">RUN_COMMAND
+python -m kairoseed.ledger verify
+# or
+lake build</div></article>
+  <article class="stage"><div class="num">2</div><h3>Evidence Generation</h3><p>Run tests, collect artifacts, and emit one standardized evidence payload.</p><div class="code">evidence/&lt;asset&gt;/receipt_v1.json
++ logs
++ artifact digests</div></article>
+  <article class="stage"><div class="num">3</div><h3>Evidence Verification</h3><p>Validate structure, asset binding, hashes, test results, scope, and verifier identity.</p><div class="code">schema â†’ binding â†’ artifact
+â†’ ledger â†’ signature â†’ scope</div></article>
+  <article class="stage"><div class="num">4</div><h3>Registry Validation</h3><p>Lean evaluates registry claims against the verified receipt and rejects invalid promotion.</p><div class="code">AssetRegistry_v1.0.csv
++
+receipt_v1.json
+âˆ’”™gistry_Schema.lean</div></article>
+  <article class="stage"><div class="num">5</div><h3>Registry State</h3><p>Only promote when every required gate passes. Otherwise remain at the lower maturity state.</p><div class="code">PRODUCTION? = YES
+only if
+all required evidence passes</div></article>
+</section>
+
+<section class="grid">
+  <div class="panel"><div class="panel-head">A Â· EVIDENCE PAYLOAD v1.0</div><div class="panel-body">
+    <h3>Canonical receipt</h3><div class="small">One JSON artifact per component run.</div>
+    <div class="code">{
+  "schema": "KAIROSEED-EVIDENCE-PAYLOAD-v1.0",
+  "asset_name": "Durable Evidence Ledger",
+  "version": "v0.3",
+  "run_command": "python -m kairoseed.ledger verify",
+  "artifact_digest": "sha256:...",
+  "durable_ledger_hash": "sha256:...",
+  "log_root": "sha256:...",
+  "tests": {"total": 5, "passed": 5},
+  "independent_verifier_sig": "...",
+  "status_claim": "Production"
+}</div>
+  </div></div>
+
+  <div class="panel"><div class="panel-head">B Â· EVIDENCE VERIFIER</div><div class="panel-body">
+    <h3>Verification sequence</h3>
+    <div class="steps">
+      <div class="step"><b>1 Â· JSON schema</b><div class="small">Required fields and types.</div></div>
+      <div class="step"><b>2 Â· Asset binding</b><div class="small">Asset, version, command.</div></div>
+      <div class="step"><b>3 Â· Artifact checks</b><div class="small">Digest format and files.</div></div>
+      <div class="step"><b>4 Â· Ledger checks</b><div class="small">Root and durability evidence.</div></div>
+      <div class="step"><b>5 Â· Signature checks</b><div class="small">Independent verifier required.</div></div>
+    </div>
+  </div></div>
+
+  <div class="panel"><div class="panel-head">C Â· REGISTRY VALIDATOR</div><div class="panel-body">
+    <h3>Lean policy layer</h3>
+    <div class="code">isProductionReady(asset, receipt) :=
+  asset.production == YES
+  âˆ§ asset.status == Production
+  âˆ§ receipt binds to asset
+  âˆ§ hashes valid
+  âˆ§ tests.total > 0
+  âˆ§ tests.passed = tests.total
+  âˆ§ independent signature present
+  âˆ§ claim â‰¤ established scope</div>
+    <div class="small">This prototype checks structure and policy logic. Cryptographic signature validation remains a separate trusted-verifier responsibility.</div>
+  </div></div>
+
+  <div class="panel"><div class="panel-head">D Â· ASSET REGISTRY</div><div class="panel-body">
+    <h3>Canonical source of truth</h3>
+    <table>
+      <thead><tr><th>Asset</th><th>Status</th><th>Public?</th><th>Prod?</th></tr></thead>
+      <tbody>
+        <tr><td>Govana Core</td><td>Reference Impl</td><td>YES</td><td>NO</td></tr>
+        <tr><td>DENY=Success</td><td>Simulator</td><td>YES</td><td>NO</td></tr>
+        <tr><td>Durable Ledger</td><td>Spec Only</td><td>NO</td><td>NO</td></tr>
+        <tr><td>GAT/VEA</td><td>Spec Only</td><td>NO</td><td>NO</td></tr>
+        <tr><td>Independent PEP</td><td>Spec Only</td><td>NO</td><td>NO</td></tr>
+        <tr><td>kairoseed-dev-001</td><td>Research Workspace</td><td>YES</td><td>NO</td></tr>
+      </tbody>
+    </table>
+  </div></div>
+</section>
+
+<section class="panel">
+  <div class="panel-head">E Â· END-TO-END FLOW</div>
+  <div class="panel-body">
+    <div class="flow">
+      <div class="node"><strong>Component</strong>Code + tests</div>
+      <div class="node"><strong>Run Command</strong>Declared execution</div>
+      <div class="node"><strong>Receipt v1</strong>Evidence payload</div>
+      <div class="node"><strong>Verifier</strong>Validate + bind</div>
+      <div class="node"><strong>Lean Gate</strong>Policy decision</div>
+      <div class="node"><strong>Registry Update</strong>Promotion only if valid</div>
+    </div>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="panel-head">F Â· MATURITY LIFECYCLE</div>
+  <div class="panel-body">
+    <div class="life">
+      <span>Spec Only</span><span>Simulator</span><span>Reference Impl</span><span>Research Workspace</span><span>Staging</span><span>Production</span>
+    </div>
+  </div>
+</section>
+
+<section class="console">
+  <div class="panel">
+    <div class="panel-head">G Â· INTERACTIVE RECEIPT CHECKER</div>
+    <div class="panel-body">
+      <p class="small">Paste a receipt. This browser-only checker performs structural and production-policy checks. It does not cryptographically verify signatures.</p>
+      <textarea id="receipt"></textarea>
+      <div class="actions">
+        <button class="btn primary" id="load">Load production example</button>
+        <button class="btn" id="check">Validate receipt</button>
+        <button class="btn warn" id="clear">Clear</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head">H Â· RESULT</div>
+    <div class="panel-body">
+      <div class="statusbar">
+        <span class="pill">Schema: local structural check</span>
+        <span class="pill">Signature crypto: NOT VERIFIED</span>
+        <span class="pill">Ledger durability: NOT VERIFIED</span>
+      </div>
+      <div id="result" class="result">No receipt checked yet.</div>
+      <div class="checks" id="checks"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Â© 2026 Sangmuan Valte Â· KAIROSEED Â· Evidence-driven deployment prototype</span>
+  <span>Capability â‰  Permission Â· Claim â‰¤ Evidence â‰¤ Established Scope</span>
+</footer>
+</div>
+
+<script>
+"use strict";
+const $ = id => document.getElementById(id);
+
+function validSha(v){
+  return typeof v==="string" && /^sha256:[0-9a-f]{64}$/.test(v);
+}
+function nonBlank(v){ return typeof v==="string" && v.trim().length>0; }
+
+function validate(r){
+  const items = [];
+  const add=(name,ok,detail)=>items.push({name,ok,detail});
+  add("Schema id", r?.schema==="KAIROSEED-EVIDENCE-PAYLOAD-v1.0", r?.schema ?? "missing");
+  add("Asset name", nonBlank(r?.asset_name), r?.asset_name ?? "missing");
+  add("Version", nonBlank(r?.version), r?.version ?? "missing");
+  add("Run command", nonBlank(r?.run_command), r?.run_command ?? "missing");
+  add("Artifact digest", validSha(r?.artifact_digest), r?.artifact_digest ?? "missing");
+  add("Durable ledger hash", validSha(r?.durable_ledger_hash), r?.durable_ledger_hash ?? "missing");
+  add("Log root", validSha(r?.log_root), r?.log_root ?? "missing");
+  const total = Number(r?.tests?.total);
+  const passed = Number(r?.tests?.passed);
+  add("Tests > 0", Number.isInteger(total) && total>0, `total=${r?.tests?.total ?? "missing"}`);
+  add("All tests passed", Number.isInteger(total)&&Number.isInteger(passed)&&total>0&&passed===total, `passed=${passed}, total=${total}`);
+  add("Independent verifier signature present", nonBlank(r?.independent_verifier_sig), r?.independent_verifier_sig ? "present (not cryptographically verified here)" : "missing");
+  add("Production status claim", r?.status_claim==="Production", r?.status_claim ?? "missing");
+  const productionReady = items.every(x=>x.ok);
+  return {items, productionReady};
+}
+
+function render(out){
+  const host=$("checks"); host.replaceChildren();
+  for(const x of out.items){
+    const row=document.createElement("div");row.className="check";
+    const dot=document.createElement("div");dot.className="dot";dot.textContent=x.ok?"âœ“":"Ã—";
+    if(!x.ok){dot.style.background="#5a2424";dot.style.color="#ffb0b0";}
+    const text=document.createElement("div");text.innerHTML=`<b>${x.name}</b><div class="small">${String(x.detail).replaceAll("<","&lt;")}</div>`;
+    row.append(dot,text);host.append(row);
+  }
+  const r=$("result");
+  if(out.productionReady){
+    r.className="result pass";
+    r.innerHTML="<b>STRUCTURAL PRODUCTION GATE: PASS</b><br><span class='small'>This means only that this local checker found all required fields in valid shape. Cryptographic signature verification, ledger durability, external artifact recomputation, dependency readiness, and independent attestation remain separate requirements.</span>";
+  } else {
+    r.className="result fail";
+    r.innerHTML="<b>STRUCTURAL PRODUCTION GATE: FAIL</b><br><span class='small'>At least one required production-evidence condition is missing or malformed.</span>";
+  }
+}
+
+$("check").addEventListener("click",()=>{
+  try{ render(validate(JSON.parse($("receipt").value))); }
+  catch(e){ $("result").className="result fail"; $("result").textContent="Invalid JSON: "+e.message; $("checks").replaceChildren(); }
+});
+$("clear").addEventListener("click",()=>{$("receipt").value="";$("checks").replaceChildren();$("result").className="result";$("result").textContent="No receipt checked yet.";});
+$("load").addEventListener("click",()=>{
+  const demo={
+    schema:"KAIROSEED-EVIDENCE-PAYLOAD-v1.0",
+    asset_name:"Durable Evidence Ledger",
+    version:"v0.3",
+    run_command:"python -m kairoseed.ledger verify",
+    timestamp:1712345678,
+    jurisdiction:"kairoseed-dev-001",
+    artifact_digest:"sha256:"+"a".repeat(64),
+    durable_ledger_hash:"sha256:"+"b".repeat(64),
+    log_root:"sha256:"+"c".repeat(64),
+    tests:{total:5,passed:5,logs:["T1.log","T2.log","T3.log","T4.log","T5.log"]},
+    independent_verifier_sig:"DEMO_SIGNATURE_PRESENT_NOT_CRYPTOGRAPHICALLY_VERIFIED",
+    status_claim:"Production"
+  };
+  $("receipt").value=JSON.stringify(demo,null,2);
+  render(validate(demo));
+});
+</script>
+</body>
+</html>
