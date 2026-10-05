@@ -4,7 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#071b2d">
-<title>KAIROSEED â€” Evidence-Driven Deployment Console</title>
+<meta name="description" content="KAIROSEED Governance Service Centre — independent research and governance engineering focused on evidence before execution, bounded authority, and falsifiable verification.">
+<meta property="og:title" content="KAIROSEED Governance Service Centre — Evidence Before Execution">
+<meta property="og:description" content="Independent governance engineering: Claim ≤ Evidence ≤ Established Scope.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<title>KAIROSEED Governance Service Centre — Evidence Before Execution</title>
 <style>
 :root{
   --bg:#061522;--panel:#0e2234;--panel2:#122a3f;--line:#2a526e;--text:#e9f6ff;
@@ -63,16 +68,83 @@ footer{margin-top:22px;padding:18px 0;border-top:1px solid var(--line);color:var
 @media(max-width:1150px){.pipeline{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr 1fr}.flow{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:720px){.shell{padding:12px}.top{align-items:flex-start}.rule{display:none}.pipeline,.grid,.console{grid-template-columns:1fr}.flow{grid-template-columns:1fr 1fr}.life{display:grid;grid-template-columns:1fr 1fr}.hero h2{font-size:2.2rem}}
 </style>
+
+<style>
+.navbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.navbar a{border:1px solid #355873;border-radius:999px;padding:7px 10px;text-decoration:none;color:#cfeaff;font-size:.75rem;background:#0b2032}
+.service-intro{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;margin:18px 0}
+.service-hero,.status-board,.privacy-card,.community-card,.collab-card{background:linear-gradient(145deg,#10263a,#0b1d2e);border:1px solid var(--line);border-radius:16px;padding:18px}
+.service-hero h2{font-size:clamp(2rem,4.8vw,4.6rem);margin:8px 0 12px;line-height:1}
+.service-hero p{color:var(--muted);max-width:780px}
+.status-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px}
+.status-card{border:1px solid #355873;border-radius:12px;padding:11px;background:#0a1b2b}
+.status-card strong{display:block;font-size:.75rem;color:#fff}
+.status-card span{font-size:.72rem;color:var(--muted)}
+.status-live{border-color:#2f9668}.status-pending{border-color:#9a7628}.status-blocked{border-color:#884747}
+.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.service-item{border:1px solid #355873;border-radius:14px;padding:14px;background:#0c2234}
+.service-item b{display:block;margin-bottom:5px;color:#e9f6ff}
+.public-private{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.boundary-list{margin:10px 0 0;padding-left:18px;color:var(--muted)}
+.warning{border:1px solid #9b6d2a;background:#3b2a13;border-radius:12px;padding:11px 12px;color:#ffe4a9;margin:12px 0;font-size:.8rem}
+.disclaimer{border-left:3px solid var(--cyan);padding:10px 12px;background:#0b2032;border-radius:8px;color:var(--muted);font-size:.8rem}
+.copy-brief{white-space:pre-wrap;background:#071725;border:1px solid #355873;border-radius:12px;padding:12px;font:12px/1.55 ui-monospace,Consolas,monospace;color:#eaf6ff}
+.section-anchor{scroll-margin-top:20px}
+@media(max-width:900px){.service-intro,.public-private,.service-grid{grid-template-columns:1fr}.status-grid{grid-template-columns:1fr}}
+</style>
+
 </head>
 <body>
 <div class="shell">
 <header class="top">
-  <div class="brand"><div class="mark">K</div><div><h1>KAIROSEED</h1><p>Evidence-Driven Deployment Console Â· v1.0 prototype</p></div></div>
-  <div class="rule"><strong>Claim â‰¤ Evidence â‰¤ Established Scope</strong>Mechanics over memory. No belief-based promotion.</div>
+  <div class="brand"><div class="mark">K</div><div><h1>KAIROSEED</h1><p>Evidence-Driven Deployment Console · v1.0 prototype</p></div></div>
+  <div class="rule"><strong>Claim ≤ Evidence ≤ Established Scope</strong>Mechanics over memory. No belief-based promotion.</div>
 </header>
 
-<section class="hero">
-  <div class="eyebrow">Implementation â†’ Evidence â†’ Registry â†’ Authorized Promotion</div>
+
+<section class="service-intro section-anchor" id="service-centre">
+  <div class="service-hero">
+    <div class="eyebrow">Official public release · KAIROSEED Governance Service Centre v1.0</div>
+    <h2>Evidence Before Execution.</h2>
+    <p>KAIROSEED is an independent governance-engineering project for making authority, scope, evidence, and execution boundaries inspectable. This public service centre exposes bounded research tools, reference implementations, maturity states, and falsifiable evidence workflows without presenting unverified runtime claims as production guarantees.</p>
+    <div class="navbar" aria-label="Service centre navigation">
+      <a href="#services">Services</a>
+      <a href="#evidence-console">Evidence Console</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#community">Developer Community</a>
+      <a href="#collaboration">Collaboration</a>
+    </div>
+  </div>
+
+  <aside class="status-board">
+    <div class="eyebrow">Public status</div>
+    <div class="status-grid">
+      <div class="status-card status-live"><strong>PUBLIC SERVICE CENTRE WEBSITE</strong><span>LIVE / production-hosted static site</span></div>
+      <div class="status-card status-live"><strong>GOVERNANCE REFERENCE IMPLEMENTATIONS</strong><span>AVAILABLE within stated test scope</span></div>
+      <div class="status-card status-pending"><strong>INDEPENDENT PRODUCTION VERIFICATION</strong><span>PENDING</span></div>
+      <div class="status-card status-blocked"><strong>PRODUCTION ENFORCEMENT RUNTIME</strong><span>NOT YET ESTABLISHED</span></div>
+    </div>
+    <div class="rule" style="margin-top:12px"><strong>Claim ≤ Evidence ≤ Established Scope</strong>Website deployment status is separate from runtime production assurance.</div>
+  </aside>
+</section>
+
+<section class="panel section-anchor" id="services">
+  <div class="panel-head">PUBLIC GOVERNANCE SERVICES · BOUNDED SCOPE</div>
+  <div class="panel-body">
+    <p class="small">These are research and engineering review services, not legal advice, compliance certification, security certification, or a guarantee of production safety.</p>
+    <div class="service-grid">
+      <div class="service-item"><b>Governance Architecture Review</b><span class="small">Inspect authority, authorization, enforcement, accountability, and control boundaries.</span></div>
+      <div class="service-item"><b>Claim-to-Evidence Audit</b><span class="small">Check whether public or internal claims are supported by inspectable evidence and scope.</span></div>
+      <div class="service-item"><b>Asset Registry & Maturity Review</b><span class="small">Separate specification, simulator, reference implementation, research workspace, staging, and production states.</span></div>
+      <div class="service-item"><b>Fail-Closed Workflow Review</b><span class="small">Evaluate deny paths, protected-state invariants, replay handling, and explicit authorization boundaries.</span></div>
+      <div class="service-item"><b>Evidence Payload & Verification Design</b><span class="small">Structure reproducible receipts, artifact binding, verifier requirements, and promotion criteria.</span></div>
+      <div class="service-item"><b>Research / Prototype Demonstration</b><span class="small">Demonstrate bounded local models and publish limitations alongside results.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="hero section-anchor" id="evidence-console">
+  <div class="eyebrow">Implementation → Evidence → Registry → Authorized Promotion</div>
   <h2>Build only what the evidence can support.</h2>
   <p>This console turns the deployment infographic into an executable local prototype. It demonstrates receipt structure and policy checks only. It does not cryptographically attest a verifier, prove ledger durability, or authorize production deployment.</p>
 </section>
@@ -85,19 +157,19 @@ lake build</div></article>
   <article class="stage"><div class="num">2</div><h3>Evidence Generation</h3><p>Run tests, collect artifacts, and emit one standardized evidence payload.</p><div class="code">evidence/&lt;asset&gt;/receipt_v1.json
 + logs
 + artifact digests</div></article>
-  <article class="stage"><div class="num">3</div><h3>Evidence Verification</h3><p>Validate structure, asset binding, hashes, test results, scope, and verifier identity.</p><div class="code">schema â†’ binding â†’ artifact
-â†’ ledger â†’ signature â†’ scope</div></article>
+  <article class="stage"><div class="num">3</div><h3>Evidence Verification</h3><p>Validate structure, asset binding, hashes, test results, scope, and verifier identity.</p><div class="code">schema → binding → artifact
+→ ledger → signature → scope</div></article>
   <article class="stage"><div class="num">4</div><h3>Registry Validation</h3><p>Lean evaluates registry claims against the verified receipt and rejects invalid promotion.</p><div class="code">AssetRegistry_v1.0.csv
 +
 receipt_v1.json
-âˆ’”™gistry_Schema.lean</div></article>
+→ Registry_Schema.lean</div></article>
   <article class="stage"><div class="num">5</div><h3>Registry State</h3><p>Only promote when every required gate passes. Otherwise remain at the lower maturity state.</p><div class="code">PRODUCTION? = YES
 only if
 all required evidence passes</div></article>
 </section>
 
 <section class="grid">
-  <div class="panel"><div class="panel-head">A Â· EVIDENCE PAYLOAD v1.0</div><div class="panel-body">
+  <div class="panel"><div class="panel-head">A · EVIDENCE PAYLOAD v1.0</div><div class="panel-body">
     <h3>Canonical receipt</h3><div class="small">One JSON artifact per component run.</div>
     <div class="code">{
   "schema": "KAIROSEED-EVIDENCE-PAYLOAD-v1.0",
@@ -113,32 +185,32 @@ all required evidence passes</div></article>
 }</div>
   </div></div>
 
-  <div class="panel"><div class="panel-head">B Â· EVIDENCE VERIFIER</div><div class="panel-body">
+  <div class="panel"><div class="panel-head">B · EVIDENCE VERIFIER</div><div class="panel-body">
     <h3>Verification sequence</h3>
     <div class="steps">
-      <div class="step"><b>1 Â· JSON schema</b><div class="small">Required fields and types.</div></div>
-      <div class="step"><b>2 Â· Asset binding</b><div class="small">Asset, version, command.</div></div>
-      <div class="step"><b>3 Â· Artifact checks</b><div class="small">Digest format and files.</div></div>
-      <div class="step"><b>4 Â· Ledger checks</b><div class="small">Root and durability evidence.</div></div>
-      <div class="step"><b>5 Â· Signature checks</b><div class="small">Independent verifier required.</div></div>
+      <div class="step"><b>1 · JSON schema</b><div class="small">Required fields and types.</div></div>
+      <div class="step"><b>2 · Asset binding</b><div class="small">Asset, version, command.</div></div>
+      <div class="step"><b>3 · Artifact checks</b><div class="small">Digest format and files.</div></div>
+      <div class="step"><b>4 · Ledger checks</b><div class="small">Root and durability evidence.</div></div>
+      <div class="step"><b>5 · Signature checks</b><div class="small">Independent verifier required.</div></div>
     </div>
   </div></div>
 
-  <div class="panel"><div class="panel-head">C Â· REGISTRY VALIDATOR</div><div class="panel-body">
+  <div class="panel"><div class="panel-head">C · REGISTRY VALIDATOR</div><div class="panel-body">
     <h3>Lean policy layer</h3>
     <div class="code">isProductionReady(asset, receipt) :=
   asset.production == YES
-  âˆ§ asset.status == Production
-  âˆ§ receipt binds to asset
-  âˆ§ hashes valid
-  âˆ§ tests.total > 0
-  âˆ§ tests.passed = tests.total
-  âˆ§ independent signature present
-  âˆ§ claim â‰¤ established scope</div>
+  ∧ asset.status == Production
+  ∧ receipt binds to asset
+  ∧ hashes valid
+  ∧ tests.total > 0
+  ∧ tests.passed = tests.total
+  ∧ independent signature present
+  ∧ claim ≤ established scope</div>
     <div class="small">This prototype checks structure and policy logic. Cryptographic signature validation remains a separate trusted-verifier responsibility.</div>
   </div></div>
 
-  <div class="panel"><div class="panel-head">D Â· ASSET REGISTRY</div><div class="panel-body">
+  <div class="panel"><div class="panel-head">D · ASSET REGISTRY</div><div class="panel-body">
     <h3>Canonical source of truth</h3>
     <table>
       <thead><tr><th>Asset</th><th>Status</th><th>Public?</th><th>Prod?</th></tr></thead>
@@ -155,7 +227,7 @@ all required evidence passes</div></article>
 </section>
 
 <section class="panel">
-  <div class="panel-head">E Â· END-TO-END FLOW</div>
+  <div class="panel-head">E · END-TO-END FLOW</div>
   <div class="panel-body">
     <div class="flow">
       <div class="node"><strong>Component</strong>Code + tests</div>
@@ -169,7 +241,7 @@ all required evidence passes</div></article>
 </section>
 
 <section class="panel">
-  <div class="panel-head">F Â· MATURITY LIFECYCLE</div>
+  <div class="panel-head">F · MATURITY LIFECYCLE</div>
   <div class="panel-body">
     <div class="life">
       <span>Spec Only</span><span>Simulator</span><span>Reference Impl</span><span>Research Workspace</span><span>Staging</span><span>Production</span>
@@ -179,9 +251,9 @@ all required evidence passes</div></article>
 
 <section class="console">
   <div class="panel">
-    <div class="panel-head">G Â· INTERACTIVE RECEIPT CHECKER</div>
+    <div class="panel-head">G · INTERACTIVE RECEIPT CHECKER</div>
     <div class="panel-body">
-      <p class="small">Paste a receipt. This browser-only checker performs structural and production-policy checks. It does not cryptographically verify signatures.</p>
+      <div class="warning"><strong>Use synthetic/test data only.</strong> Never paste credentials, private keys, recovery phrases, personal identifiers, proprietary code, or confidential evidence.</div><p class="small">Paste a synthetic receipt. This browser-only checker performs structural and production-policy checks. It does not cryptographically verify signatures.</p>
       <textarea id="receipt"></textarea>
       <div class="actions">
         <button class="btn primary" id="load">Load production example</button>
@@ -192,7 +264,7 @@ all required evidence passes</div></article>
   </div>
 
   <div class="panel">
-    <div class="panel-head">H Â· RESULT</div>
+    <div class="panel-head">H · RESULT</div>
     <div class="panel-body">
       <div class="statusbar">
         <span class="pill">Schema: local structural check</span>
@@ -205,9 +277,88 @@ all required evidence passes</div></article>
   </div>
 </section>
 
+
+<section class="panel section-anchor" id="privacy">
+  <div class="panel-head">PRIVACY & CONFIDENTIALITY</div>
+  <div class="panel-body">
+    <div class="public-private">
+      <div class="privacy-card">
+        <h3>Application-level privacy boundary</h3>
+        <ul class="boundary-list">
+          <li>No user accounts are implemented.</li>
+          <li>No application-level analytics or tracking code is intentionally included.</li>
+          <li>No server-side receipt processing is implemented in this prototype.</li>
+          <li>The receipt checker runs client-side in the browser.</li>
+          <li>Internal concurrency traces, hidden prompts, private notes, credentials, and private evidence are not published by this site.</li>
+        </ul>
+        <div class="disclaimer">Hosting infrastructure may still process ordinary request metadata such as IP address, user agent, and delivery logs as part of normal web hosting. This site does not claim absolute anonymity.</div>
+      </div>
+      <div class="privacy-card">
+        <h3>Never paste secrets here</h3>
+        <div class="warning"><strong>Use synthetic or public test data only.</strong><br>Do not paste passwords, API keys, recovery phrases, private keys, authentication tokens, personal identifiers, confidential source code, proprietary documents, or other secrets into the public checker.</div>
+        <p class="small">For confidential governance work, use a private review environment and redact sensitive evidence before sharing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="panel-head">PUBLIC / PRIVATE BOUNDARY</div>
+  <div class="panel-body public-private">
+    <div class="privacy-card">
+      <h3>PUBLIC</h3>
+      <ul class="boundary-list">
+        <li>Architecture summaries</li>
+        <li>Public asset-registry states</li>
+        <li>Reference demonstrations</li>
+        <li>Scoped evidence claims</li>
+        <li>Public reproducibility instructions</li>
+      </ul>
+    </div>
+    <div class="privacy-card">
+      <h3>PRIVATE</h3>
+      <ul class="boundary-list">
+        <li>Credentials and authentication material</li>
+        <li>Unreleased research and internal concurrency traces</li>
+        <li>Private logs and private prompts</li>
+        <li>Private keys and recovery material</li>
+        <li>Personally identifying information</li>
+        <li>Confidential or proprietary source material</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="panel section-anchor" id="community">
+  <div class="panel-head">FOR THE OPENAI DEVELOPER COMMUNITY</div>
+  <div class="panel-body community-card">
+    <h3>First public KAIROSEED Governance Service Centre release</h3>
+    <p>This release is a follow-up public artifact for an independent research and governance-engineering project. It is intended to make claims, evidence, maturity state, and execution boundaries easier to inspect.</p>
+    <p class="small">Technical review, falsification attempts, reproducibility feedback, and bounded collaboration are welcome. KAIROSEED is an independent project and this site does not imply OpenAI endorsement, partnership, certification, or affiliation.</p>
+  </div>
+</section>
+
+<section class="panel section-anchor" id="collaboration">
+  <div class="panel-head">CONTACT / COLLABORATION</div>
+  <div class="panel-body collab-card">
+    <h3>Share a bounded collaboration brief</h3>
+    <p class="small">This site intentionally avoids collecting contact details. Copy the brief below and share it through the communication channel you choose.</p>
+    <div class="copy-brief" id="collab-brief">KAIROSEED COLLABORATION BRIEF
+Purpose:
+System or workflow being reviewed:
+Claim being evaluated:
+Evidence available:
+Established scope:
+Known limitations:
+Requested review:
+Confidential material removed/redacted: YES / NO</div>
+    <div class="actions"><button class="btn" id="copy-brief">Copy collaboration brief</button></div>
+  </div>
+</section>
+
 <footer>
-  <span>Â© 2026 Sangmuan Valte Â· KAIROSEED Â· Evidence-driven deployment prototype</span>
-  <span>Capability â‰  Permission Â· Claim â‰¤ Evidence â‰¤ Established Scope</span>
+  <span>© 2026 Sangmuan Valte · KAIROSEED Governance Service Centre</span>
+  <span>Independent research project. Not affiliated with or endorsed by OpenAI. Public website deployment does not constitute certification of the underlying governance runtime.<br>Capability ≠ Permission · Claim ≤ Evidence ≤ Established Scope</span>
 </footer>
 </div>
 
@@ -244,7 +395,7 @@ function render(out){
   const host=$("checks"); host.replaceChildren();
   for(const x of out.items){
     const row=document.createElement("div");row.className="check";
-    const dot=document.createElement("div");dot.className="dot";dot.textContent=x.ok?"âœ“":"Ã—";
+    const dot=document.createElement("div");dot.className="dot";dot.textContent=x.ok?"✓":"×";
     if(!x.ok){dot.style.background="#5a2424";dot.style.color="#ffb0b0";}
     const text=document.createElement("div");text.innerHTML=`<b>${x.name}</b><div class="small">${String(x.detail).replaceAll("<","&lt;")}</div>`;
     row.append(dot,text);host.append(row);
@@ -282,6 +433,21 @@ $("load").addEventListener("click",()=>{
   $("receipt").value=JSON.stringify(demo,null,2);
   render(validate(demo));
 });
+
+document.getElementById("copy-brief")?.addEventListener("click", async () => {
+  const text = document.getElementById("collab-brief")?.textContent || "";
+  try {
+    if (!navigator.clipboard) throw new Error("Clipboard API unavailable");
+    await navigator.clipboard.writeText(text);
+    const b = document.getElementById("copy-brief");
+    const old = b.textContent;
+    b.textContent = "Copied";
+    setTimeout(() => { b.textContent = old; }, 1600);
+  } catch {
+    window.prompt("Copy this collaboration brief:", text);
+  }
+});
+
 </script>
 </body>
 </html>
