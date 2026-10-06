@@ -1,0 +1,62 @@
+apiVersion: kairoseed.dev/v0.1
+kind: JirehRuntimeBinding
+metadata:
+  name: jireh-claim-evidence-guard
+  status: SPECIFICATION_NOT_IMPLEMENTATION
+  baselineCommit: f28a4bba6ab5923cfa5db6a245d686dd59da1c01
+spec:
+  invariant: "C ⊆ E"
+  semantics:
+    claimAtom: "A declared claim identifier."
+    evidenceAtom: "An admitted evidence identifier with explicit supports_claims bindings."
+    valid: "Every active claim atom is present in the union of supports_claims over admitted evidence atoms."
+    cardinalityRule: "Counts alone do not establish inclusion."
+
+  runtimeInputs:
+    claimRegistryMap: kairoseed_claim_registry
+    evidenceRegistryMap: kairoseed_evidence_registry
+    traceIdField: trace_id
+    epochField: epoch
+
+  ebpfAdapter:
+    status: NOT_IMPLEMENTED
+    purpose: "Observe declared runtime effect identifiers and associate them with a governed trace."
+    prohibitedClaim: "This manifest does not establish sub-millisecond detection, eBPF correctness, or complete observation coverage."
+    requiredBeforeProduction:
+      - "verifier-independent test of attach points"
+      - "coverage analysis for relevant effect paths"
+      - "measured latency distribution"
+      - "fail-open/fail-closed fault injection"
+      - "kernel/version compatibility matrix"
+
+  lyapunovMonitor:
+    status: EXPERIMENTAL_OPTIONAL_DIAGNOSTIC
+    purpose: "Track a declared drift functional V(t) when one is mathematically defined for the runtime state."
+    rule: "A Lyapunov diagnostic may trigger review or denial only under a separately specified and tested threshold policy."
+    prohibitedClaim: "Lyapunov terminology alone does not prove runtime safety or bounded latency."
+
+  enforcement:
+    mode: FAIL_CLOSED_TARGET_BEHAVIOR
+    onClaimWithoutEvidence:
+      decision: DENY
+      targetAction: terminate_governed_namespace
+      receiptCode: CLAIM_WITHOUT_EVIDENCE
+    onTelemetryUnavailable:
+      decision: DENY
+      receiptCode: TELEMETRY_UNAVAILABLE
+
+  receipt:
+    schema: receipt_v1.json
+    requiredFields:
+      - trace_id
+      - epoch
+      - decision
+      - reason_code
+      - claim_atoms
+      - evidence_ids
+      - evidence_digest
+      - policy_digest
+      - timestamp
+
+  evidenceBoundary:
+    statement: "Passing this specification does not prove the future eBPF program, kernel, TPM, OPA engine, or namespace termination path correct."
