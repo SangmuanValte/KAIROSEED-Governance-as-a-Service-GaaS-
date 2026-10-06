@@ -1,0 +1,67 @@
+{
+  "schema": "kairoseed.verification_inequality.v0.1",
+  "status": "ARCHITECTURAL_SPEC",
+  "baseline": {
+    "repository": "SangmuanValte/KAIROSEED-Governance-as-a-Service-GaaS-",
+    "commit": "f28a4bba6ab5923cfa5db6a245d686dd59da1c01",
+    "sigma_star_document": "docs/SIGMASTAR.md"
+  },
+  "invariant": {
+    "notation": "C_subset_E_subset_S_auth",
+    "statement": "C ⊆ E ⊆ S_auth",
+    "claim_to_evidence": "Every claim atom MUST be supported by at least one admitted evidence atom.",
+    "evidence_to_scope": "Every scope atom exercised by admitted evidence MUST belong to the active epoch authorization set.",
+    "cardinality_warning": "|C| and |E| alone do not establish set inclusion; support and scope bindings are explicit relations."
+  },
+  "decision_order": [
+    "epoch_valid",
+    "evidence_within_authorized_scope",
+    "claims_supported_by_evidence",
+    "allow"
+  ],
+  "fail_closed": true,
+  "historical_authority": {
+    "rule": "A token is active only in the epoch for which it was issued.",
+    "stale_epoch_result": "DENY"
+  },
+  "subsystems": {
+    "GOVANA": {
+      "owner_of": "E ⊆ S_auth",
+      "stage": "pre_execution",
+      "mechanism": "OPA/Rego policy decision plus epoch binding",
+      "failure_code": "EVIDENCE_OUTSIDE_SCOPE"
+    },
+    "JIREH": {
+      "owner_of": "C ⊆ E",
+      "stage": "runtime_or_precommit_claim_gate",
+      "mechanism": "claim/evidence binding with optional runtime telemetry adapter",
+      "failure_code": "CLAIM_WITHOUT_EVIDENCE"
+    }
+  },
+  "formal_boundary": {
+    "lean_proves": [
+      "abstract claim/evidence inclusion rule",
+      "abstract evidence/scope inclusion rule",
+      "stale epoch tokens are unauthorized under the epoch-equality model",
+      "concrete counterexamples used by the formal specification"
+    ],
+    "lean_does_not_prove": [
+      "eBPF implementation correctness",
+      "OPA engine correctness",
+      "TPM authenticity",
+      "runtime detection latency",
+      "absence of hidden execution",
+      "empirical completeness"
+    ]
+  },
+  "reported_external_evidence": {
+    "H_0": "charter.txt L0-0000000",
+    "tpm_pcr": "a3f9...e21c",
+    "ledger_hash": "0x9f3b27...",
+    "w_attestation": "vea-prod-01",
+    "library_backup": "Merkle 14/14, reported 42ms verify",
+    "power_log": "E0 0W honest",
+    "verification_status": "UNVERIFIED_IN_THIS_ARTIFACT",
+    "note": "These strings are preserved as reported references only and are not elevated to verified evidence by this registry."
+  }
+}
