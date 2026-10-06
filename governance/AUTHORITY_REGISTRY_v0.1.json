@@ -1,0 +1,15 @@
+{
+  "schema": "kairoseed.authority_registry.v0.1",
+  "status": "FAIL_CLOSED_UNCONFIGURED",
+  "active_epoch": null,
+  "authorized_scope": [],
+  "authorized_capabilities": [],
+  "authorized_enclaves": [],
+  "token_policy": {
+    "require_exact_epoch_match": true,
+    "historical_tokens_have_active_authority": false,
+    "default_decision": "DENY"
+  },
+  "activation_rule": "Authority becomes active only after an explicit epoch identifier, scope whitelist, capability whitelist, policy digest, and authorization record are committed.",
+  "claim_boundary": "This registry defines authorization data. It does not itself prove that an enforcement runtime consumed or enforced it."
+}
