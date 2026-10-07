@@ -1,5 +1,6 @@
 import json
 from hashlib import sha256
+import sqlite3
 import tempfile
 from concurrent.futures import ThreadPoolExecutor
 
@@ -55,16 +56,26 @@ def test_evidence_record_hash_reconstructs():
     assert record["record_hash"] == expected
 
 
-def test_evidence_chain_detects_modified_record():
-    ledger = EvidenceLedger()
-    proposal = ActionProposal("agent-1", "read_report", "authorized", "v0.1")
-    govern(proposal, ledger)
-    govern(proposal, ledger)
+def test_evidence_chain_detects_modified_persisted_record():
+    with tempfile.TemporaryDirectory() as directory:
+        path = f"{directory}/tamper.sqlite3"
+        ledger = EvidenceLedger(path)
+        proposal = ActionProposal("agent-1", "read_report", "authorized", "v0.1")
+        govern(proposal, ledger)
+        govern(proposal, ledger)
 
-    original_hash = ledger.records[0]["record_hash"]
-    ledger.records[0]["reason"] = "tampered"
-    assert not ledger.verify_chain()
-    assert ledger.records[1]["previous_hash"] == original_hash
+        original_hash = ledger.records[0]["record_hash"]
+        ledger.close()
+
+        attacker = sqlite3.connect(path)
+        attacker.execute("UPDATE evidence SET reason = ? WHERE id = 1", ("tampered",))
+        attacker.commit()
+        attacker.close()
+
+        reopened = EvidenceLedger(path)
+        assert not reopened.verify_chain()
+        assert reopened.records[1]["previous_hash"] == original_hash
+        reopened.close()
 
 
 def test_concurrent_governance_preserves_chain():
