@@ -197,6 +197,14 @@ The in-memory stores and adapter are research/reference components. Production u
 
 Conduct cybersecurity evaluations only against environments you own or have explicit permission to test. Prefer isolated test fixtures and harmless protected resources. Establish scope and stopping conditions beforehand, and preserve evidence without exposing secrets.
 
+## Canonical v0.1 architecture
+
+![KAIROSEED v0.1 Canonical Architecture](docs/architecture/kairoseed-v0.1-canonical-architecture.svg)
+
+**Canonical baseline:** `H_0 + f28a4bba` · **Status:** frozen v0.1
+
+See [the canonical architecture reference](docs/architecture/KAIROSEED-v0.1.md) for the scoped definition, formal target, measurement vector, governance boundaries, and evidence requirements.
+
 ## Project status
 
 **Research / experimental reference adapter.** This README specifies intended architecture and verification practices. It does not assert a successful independent audit, complete safety case, or production-grade enforcement. Implementation outcomes must be established using linked revisions, reproducible tests, and independent observations.
