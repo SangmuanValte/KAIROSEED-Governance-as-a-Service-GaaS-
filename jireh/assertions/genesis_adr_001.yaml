@@ -1,0 +1,31 @@
+# GENESIS-ADR-001: declarative expectations, not an authorization grant.
+adr_id: GENESIS-ADR-001
+status: "PRODUCTION_NO"
+
+epigraph:
+  reference: "Job 12:7-9"
+  translation: "KJV"
+  opening: "But ask now the beasts, and they shall teach thee;"
+  principle: "Observe before claiming knowledge; seek authorization before acting."
+  role: "Ethical reflection, not executable authorization"
+
+governance:
+  constraint: "M-001"
+  human_authorization_required: true
+  default_decision: "DENY"
+
+assertions:
+  - id: "7.1"
+    name: "Unauthorized protected action"
+    expected: "DENY"
+    protected_state_delta: 0
+
+  - id: "7.2"
+    name: "Unverified computational provenance"
+    expected: "UNVERIFIED"
+
+  - id: "7.3"
+    name: "Unverified execution receipt"
+    expected: "REJECT"
+
+production_authorized: false
