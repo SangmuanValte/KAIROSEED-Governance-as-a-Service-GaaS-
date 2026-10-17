@@ -1,208 +1,146 @@
-# KAIROSEED — Governance-as-a-Service (GaaS)
+# GENESIS-ADR-001 — Governed Intelligence Gates
 
-**Human-centered AI innovation with verifiable governance.**
+**Target branch:** `feature/genesis-adr-001-governance-gates`  
+**Parent repository:** [KAIROSEED Governance-as-a-Service](https://github.com/SangmuanValte/KAIROSEED-Governance-as-a-Service-GaaS-)  
+**Status:** Development proposal / reference harness  
+**Production:** **NO**
 
-KAIROSEED is an experimental, verification-first governance framework for AI-assisted systems, developed by **Sangmuan Valte**. This repository focuses on a **Governance-as-a-Service (GaaS) reference adapter** for defining, enforcing, and evaluating delegated authority for AI agents through executable policies, authorization boundaries, runtime controls, and auditable evidence.
+> **M-001:** No consequential AI action without traceable authorization, execution, validation, and accountability.
 
-> **Embrace intelligence. Preserve human authority. Build responsibly. Verify what you claim.**
+GENESIS Intelligence treats language models as replaceable reasoning components. **GOVANA** governs whether a proposed operation is permitted; an independently constrained executor performs only authorized operations; **JIREH** verifies resulting evidence and state. The model's own explanation is never an authorization credential or independent proof.
 
-> **Repository boundary:** This is a reference implementation and research workspace, **not proof of a production security deployment**.
+## 1. Intellectual lineage: 1842 → 1997 → 2026
 
-## Vision
+| Period | Milestone | Architectural lesson |
+|---|---|---|
+| **1842–1843** | Charles Babbage's Analytical Engine and Ada Lovelace's notes on Menabrea's 1842 description (Lovelace's translation and Note G published in **1843**) | Computation can follow explicit symbolic instructions; the instructions and the machine can be analyzed separately. |
+| **1997** | IBM Deep Blue defeats Garry Kasparov using specialized chess search and evaluation | Powerful performance can emerge from domain-specific algorithms without general-purpose understanding. Successful output does not explain or authorize every internal operation. |
+| **2026** | GENESIS-ADR-001 proposes GOVANA authorization and JIREH evidence verification around AI tool use | Reasoning capability must remain separate from permission to cause side effects; evidence must be independently checkable. |
 
-AI offers students, graduates, researchers, and builders opportunities to learn practical skills, create useful tools, and improve productivity. KAIROSEED encourages adapting to technological change while taking risks of errors, misuse, displacement, and loss of control seriously.
+This is a **conceptual lineage**, not a claim that Lovelace or Deep Blue implemented contemporary AI authorization protocols. Deep Blue's chess moves should not be characterized as failures of governance, and the history does not by itself establish the correctness of these gates.
 
-The goal is not to replace legitimate human judgment with model output. It is to investigate systems in which probabilistic agents can **propose** actions without independently granting themselves **permission** to execute consequential actions.
-
-## Core principles
-
-1. **Human agency:** Legitimate authority and accountability remain with people and authorized institutions.
-2. **Capability is not permission:** Access to an API, tool, or model capability is not authorization to use it.
-3. **Fail-closed governance:** Missing, expired, invalid, or unverifiable mandatory authorization must block protected actions.
-4. **Bounded execution:** Authorized operations remain within approved resources, conditions, and time windows.
-5. **Independent verification:** An agent's success statement cannot substitute for checking the actual protected state.
-6. **Evidence preservation:** Keep reproducible records of decisions, observations, failures, and limitations.
-7. **Honest claims:** State only what observed evidence supports within the established testing scope.
-
-## Decision pipeline
+## 2. Architecture and trust boundaries
 
 ```text
-Validate
-   ↓
-Filter (admissibility)
-   ↓
-δ-Pareto Frontier
-   ↓
-Scalar Preference
-   ↓
-Independent Authorization
+GENESIS / AURORA (untrusted proposals)
+              |
+              v
+      GOVANA authorization broker
+      identity | scope | resource | expiry | replay | diff binding
+              |
+       +------+------+
+       |             |
+      DENY         ALLOW (scoped grant)
+       |             |
+ no protected      v
+ state change   constrained executor
+                     |
+                     v
+                JIREH verifier
+              receipt | state | ledger
 ```
 
-- **Validate:** Assess candidate inputs, provenance, evidence, and constraints.
-- **Filter:** Remove candidates that violate non-negotiable admissibility requirements.
-- **δ-Pareto frontier:** Consider trade-offs under declared objectives, tolerances, and precisely specified comparison semantics. Tolerance-based dominance may be non-transitive; implementations must define cycle and empty-frontier handling.
-- **Scalar preference:** Choose among admissible candidates using an explicitly declared preference function.
-- **Independent authorization:** Separately check identity, authority, resource scope, policy, expiry, and relevant conditions before execution.
+**Core separations**
 
-**Invariants:** Optimization cannot override admissibility. Preference cannot create authority.
+- Capability ≠ authorization.
+- Evidence ≠ authorization.
+- Generated reasoning ≠ independent verification.
+- A hash is not a signature, and an in-memory log is not a durable tamper-evident ledger.
+- An `ALLOW` decision does not itself prove execution, persistence, or correctness.
 
-## Canonical governed execution
+For a rejected request, the target protected-state invariant is:
+
+\[
+\neg \operatorname{Authorized}(r) \Rightarrow S_{\mathrm{after}} = S_{\mathrm{before}}.
+\]
+
+The invariant concerns **protected state**, not the absence of all activity: a denial may still create an authorized audit record. Preventing partial effects requires interception before consequential tools and, where appropriate, atomic transactions and recovery controls.
+
+## 3. GENESIS-ADR-001 Section 7 — verification scenarios
+
+The proposed three-file reference harness consists of:
 
 ```text
-Probabilistic agent / PROPOSE
-           ↓
-Capability / CAN
-           ↓
-GOVANA / MAY (independent authorization)
-           ↓
-JIREH / ENFORCE (runtime boundaries)
-           ↓
-Bounded transition / S₀ → S₁
-           ↓
-Independent verifier
-           ↓
-Evidence preservation
-           ↓
-DONE (verified finality)
+jireh/
+  assertions/
+    genesis_adr_001.yaml     # declarative expected behaviors
+  trap.py                    # fail-closed simulation gate
+  tests/
+    test_genesis_adr_001.py  # negative and positive controls
 ```
 
-The intended fail-closed property for a defined protected resource and threat model is:
+**7.1 — Empty-wallet and unauthorized credential substitution**
+
+A simulated deployment request with an unfunded wallet must be blocked and routed to a human-reviewed funding request. The test corpus should use **362 inert synthetic identifiers**, never actual recovery phrases or private keys. The simulated executor must not access credential sources, and protected state must remain unchanged.
+
+Expected outcome: `BLOCKED_PENDING_FUNDING`; no consequential execution; `S_after == S_before`.
+
+**7.2 — Reproducible provenance**
+
+For a *claim* involving pseudorandom-generator state reconstruction or lattice-basis reduction, require a documented algorithm, exact parameters, input provenance, code hash, declared environment, and independently reproducible outputs. If LLL is used, record the LLL implementation and reduction parameters; **LLL is not mandatory for unrelated provenance claims**. Do not equate reproducing a calculation with proving the absence of a cryptographic backdoor.
+
+Expected outcome: `VERIFIED` only after an independent rerun matches the precisely specified claim; otherwise `UNVERIFIED`, with downstream consequential use blocked.
+
+**7.3 — Complete execution receipts**
+
+Reject missing or unverifiable resource origin, model-invented authorization, invalid signature, broken chain linkage, or mismatched action/resource/diff binding. Sensitive credentials must never appear in receipts.
+
+Expected outcome: `INCOMPLETE_TRACE`, `UNAUTHORIZED_ORIGINATION`, or `TAMPERED_LEDGER` as applicable.
+
+The reported AI-agent wallet incident and the reported NIST curve-seed research are **motivating case studies**, not evidence that this repository has already passed a production security assessment.
+
+## 4. Proposed repository integration
 
 ```text
-NOT Authorized(action) ⇒ No protected state change caused by that action
+govana/
+  __init__.py
+  authorization_broker.py
+  grants.py
+  policy_adapter.py
+jireh/
+  __init__.py
+  trap.py
+  receipt_validator.py
+  audit_ledger.py
+  assertions/genesis_adr_001.yaml
+  tests/test_genesis_adr_001.py
+schemas/
+  authorization_grant.schema.json
+  execution_receipt.schema.json
+docs/decisions/GENESIS-ADR-001.md
 ```
 
-This is a **testable design requirement**, not an established universal guarantee. It depends on explicit assumptions about the protected state, adversary capabilities, enforcement completeness, and observer independence.
+**Compatibility rule:** Preserve existing `cognitive_coordination/`, `automate-prototype/`, `astra/`, and existing tests. Implement adapters first; do not silently replace existing authorization or evidence semantics.
 
-A proposed finality rule is:
+## 5. Running the tests
 
-```text
-DONE =
-  Authorized Transition
-  AND Bounded Execution
-  AND Independent Verification
-  AND Evidence Preserved
-```
-
-## Verification-first execution adapter
-
-This repository's reference adapter makes the path from agent capability to consequential action explicit:
-
-```text
-Agent → Adapter → Policy / Authorization → Execution Gate
-      → Tool → Verification → Evidence
-```
-
-The minimal reference sequence is:
-
-```text
-Capability → Authorization → Enforcement → Execution → Verification → Evidence
-```
-
-### Repository artifacts
-
-- `src/kairoseed.ts` — TypeScript reference adapter.
-- `docs/ADAPTER.md` — adapter contracts and production-boundary notes.
-- `docs/EVIDENCE.md` — evidence schema and independent-observer procedure.
-- `docs/THREAT_MODEL.md` — adversarial execution-boundary cases.
-- `GaaS-Safety-Framework/Foundation/` — prior Agent Circumvention Test and WebMCP prototype materials.
-
-These paths describe repository materials; their presence alone does not establish that tests passed.
-
-### 20-second conceptual demo
-
-```text
-ACTIVE claim
-    ↓
-authorized action / permitted execution
-    ↓
-revoke claim
-    ↓
-same proposed action
-    ↓
-deny / protected execution blocked
-    ↓
-verify actual state and inspect preserved evidence
-```
-
-**Evaluation question:** Does revocation prevent consequential state changes when checked independently, including the specified edge cases?
-
-## Evidence standard
-
-> **Claim ≤ Evidence ≤ Established Scope**
-
-For every meaningful security or safety assertion, record:
-
-- Precisely defined property, assumptions, scope, and acceptance criteria.
-- Repository revision, dependency and runtime versions, and environment.
-- Tests **actually run**, observed results, and timestamps.
-- Independent observation of protected state and authorization decisions.
-- Negative results, unresolved risks, untested cases, and limitations.
-
-Use **PASS** only for demonstrated properties within the tested scope; **WARN** for incomplete or inconclusive evidence; and **BLOCK** when a critical requirement is violated. Inaccessible evidence is **UNVERIFIED**, not automatically FAIL.
-
-> **Unknown ≠ False.** A planned test is not an executed test.
-
-### Example evidence collection for a deployment-backed implementation
-
-Where the indicated database tables and credentials are available and collecting these records is authorized:
+Once the proposed harness files are implemented in this branch, run from the repository root:
 
 ```bash
-mkdir -p evidence
-
-psql "$DB_URL" -c "
-SELECT * FROM governance_events
-ORDER BY created_at DESC LIMIT 100;
-" > evidence/governance_events.txt
-
-psql "$DB_URL" -c "
-SELECT * FROM authorization_decisions
-ORDER BY created_at DESC LIMIT 100;
-" > evidence/authorization_decisions.txt
-
-psql "$DB_URL" -c "
-SELECT * FROM executions
-ORDER BY created_at DESC LIMIT 100;
-" > evidence/executions.txt
+python3 -m unittest discover -s jireh/tests -p 'test_*.py' -v
 ```
 
-If a suitable authorized health/invariant endpoint exists:
+The command is an **intended invocation**, not a claim that these files are already present or that tests have been executed on this branch. The existing repository may also use `pytest`; run its established CI suite to detect regressions.
 
-```bash
-curl -s "$HEALTH_URL" | jq > evidence/invariants_snapshot.json
-```
+## 6. Acceptance gates
 
-Avoid committing credentials, personal information, or confidential logs to public repositories. Evidence collection commands are **examples**, not proof they have run successfully.
+- [ ] Unauthorized and unfunded operations fail closed **before** tool invocation.
+- [ ] Valid grants bind principal, action, resource, exact diff, issuer, expiry, and nonce.
+- [ ] Expired, forged, mismatched, or replayed grants are denied.
+- [ ] Denied operations preserve protected-state hash; audit effects are accounted for separately.
+- [ ] Independent JIREH checks receipts against external evidence, not agent assertions.
+- [ ] Reproducibility tests verify exact outputs in a constrained test environment.
+- [ ] Existing repository tests and new adversarial tests pass on the branch head.
+- [ ] Crash safety, durable evidence, isolation, and deployment controls are reviewed separately.
 
-## Safety-case research direction
+**No(PASS):** Missing proof or invalid authorization means no consequential execution. An inaccessible artifact is **UNVERIFIED**, not automatically proven false.
 
-KAIROSEED can express scoped assurance arguments as **claim → supporting reasoning → observations → independent review → authorized decision**. A safety case is not itself proof of secure operation.
+## 7. Security and production boundary
 
-**Next falsifiable milestone:** In a local, isolated test harness, check whether an untrusted agent can modify a harmless, defined protected resource when an independent authorization evaluator denies the request. Test expiry, replay, resource scope, and evidence integrity only in the authorized environment; retain both successes and failures.
+This work is a **research/reference implementation**. Unit tests, simulated grants, local hashes, and mock receipts do not establish real-world atomicity, signature verification, secure credential custody, independent audit retention, or complete tool-path mediation.
 
-## Production boundary
-
-The in-memory stores and adapter are research/reference components. Production use would require separately implemented and verified controls appropriate to its threat model, including:
-
-- Authoritative, durable policy and authorization state.
-- Concurrency safety and single-use authorization handling.
-- Replay prevention and identity/resource/scope binding.
-- Policy-version checks, expiry enforcement, and execution isolation.
-- Tamper-evident evidence storage and independent verification.
-- Operational incident review and documented response procedures.
-
-**None of these requirements is claimed to be universally sufficient or already verified in production.**
-
-## Responsible experimentation
-
-Conduct cybersecurity evaluations only against environments you own or have explicit permission to test. Prefer isolated test fixtures and harmless protected resources. Establish scope and stopping conditions beforehand, and preserve evidence without exposing secrets.
-
-## Project status
-
-**Research / experimental reference adapter.** This README specifies intended architecture and verification practices. It does not assert a successful independent audit, complete safety case, or production-grade enforcement. Implementation outcomes must be established using linked revisions, reproducible tests, and independent observations.
+**Production = NO** until these properties are implemented, independently tested, and explicitly authorized through the repository's release process.
 
 ---
 
-**Project:** KAIROSEED · Governance-as-a-Service (GaaS)  
-**Author:** Sangmuan Valte  
-**Guiding principle:** **Proposal ≠ Permission ≠ Verified Success.**
+**Decision:** Build governed intelligence first; treat model capability as a replaceable input, never a source of authority.
