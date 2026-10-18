@@ -25,3 +25,6 @@ jobs:
         run: python -m unittest -v
       - name: Run prototype
         run: python pipeline.py
+      - name: Run canonical six-stage tests
+        working-directory: .
+        run: python -m unittest discover -s canonical_flow -p 'test_*.py' -v
