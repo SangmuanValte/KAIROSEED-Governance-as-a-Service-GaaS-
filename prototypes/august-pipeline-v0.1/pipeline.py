@@ -117,7 +117,7 @@ def run_pipeline(p: Proposal) -> dict:
         events.append(
             event(
                 "EXECUTE",
-                "HALTED",
+                "BLOCKED" if decision == Decision.BLOCK else "HALTED",
                 proposal_id=proposal_id,
                 reason="no_valid_authorization",
             )
