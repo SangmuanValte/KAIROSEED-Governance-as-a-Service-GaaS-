@@ -54,7 +54,7 @@ This documentation file is **not** itself the frozen canonical claim set and con
 
 ## E. Related open research
 
-- [Issue #30 — Independent Containment Verification: Complete Mediation and Unauthorized Effects](../../issues/30) — proposed scope/coverage model, independent observer requirements, adversarial matrix, and assurance contract.
+- [Issue #30 — Independent Containment Verification: Complete Mediation and Unauthorized Effects](https://github.com/SangmuanValte/KAIROSEED-Governance-as-a-Service-GaaS-/issues/30) — proposed scope/coverage model, independent observer requirements, adversarial matrix, and assurance contract.
 - KGS-003-EVIDENCE-002 — proposed synthetic race measurement protocol; any synthetic results must remain explicitly separated from real JIREH/eBPF/seccomp performance and C3/C6 assurance.
 - C-KILL-v0.4 — proposed successor claim for **ordered, witnessed, non-atomic** termination. The previously asserted atomicity guarantee is not accepted as proven; preserve the original assertion as historical context. Do not label an experimental counterexample as executed unless linked evidence establishes it.
 
