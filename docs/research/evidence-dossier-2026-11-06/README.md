@@ -14,6 +14,7 @@ The repository contains meaningful *inspectable artifacts*: a Python GaaS protot
 - [Current-head CI finding and reproducible failure](CI_FINDINGS.md)
 - [Verification and evidence-collection requirements](VERIFICATION_PROTOCOL.md)
 - [Machine-readable research claim inventory](claims.json)
+- [Archived synthetic experiment: raw source, 1,000 trial records and provenance](SYNTHETIC_RACE_EVIDENCE.md) — original environment partially undocumented; **NOT** real JIREH containment evidence.
 - [Self-contained metadata preflight checker](../../../research/evidence_dossier/preflight.py) — validates dossier metadata **only**, does not issue security PASS.
 - [Existing independent containment research issue #30](https://github.com/SangmuanValte/KAIROSEED-Governance-as-a-Service-GaaS-/issues/30)
 - [Existing release gate issue #10](https://github.com/SangmuanValte/KAIROSEED-Governance-as-a-Service-GaaS-/issues/10)
