@@ -57,3 +57,21 @@ def audit_report(ledger_path, scope_path, output_path):
         json.dumps(result, sort_keys=True, indent=2) + "\n", encoding="utf-8"
     )
     return result
+
+
+def audit_worker(request_channel, ledger_path, scope_path):
+    """Dedicated read-only audit process; reports on file content, never modifies it."""
+    while True:
+        try:
+            message = request_channel.recv()
+        except EOFError:
+            return
+        if message.get("op") == "stop":
+            request_channel.send({"ok": True})
+            return
+        if message.get("op") != "audit":
+            request_channel.send({"ok": False, "status": "UNKNOWN_AUDIT_REQUEST"})
+            continue
+        target = message.get("ledger_path", ledger_path)
+        result = audit_ledger(target, scope_path)
+        request_channel.send(result)
