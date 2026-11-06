@@ -1,0 +1,45 @@
+name: KAIROSEED Phase 0 Split Synthetic Tests
+
+on:
+  pull_request:
+    paths:
+      - "kairoseed-phase0/**"
+      - ".github/workflows/kairoseed-phase0-synthetic.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  isolated-synthetic-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile Phase 0 testbed only
+        run: python -m compileall -q kairoseed-phase0
+      - name: Run split-process synthetic falsification tests
+        env:
+          KAIROSEED_PHASE0_LEDGER_PATH: kairoseed-phase0/ledger.jsonl
+        run: python -m unittest discover -s kairoseed-phase0 -p test_phase0.py -v
+      - name: Verify generated evidence ledger with read-only audit
+        env:
+          PYTHONPATH: kairoseed-phase0
+        run: |
+          python - <<'PY'
+          from audit import audit_ledger
+          result = audit_ledger("kairoseed-phase0/ledger.jsonl", "kairoseed-phase0/scope.json")
+          print(result)
+          assert result["valid"], result
+          assert result["checked"] >= 12, result
+          print("PHASE0_SYNTHETIC_LEDGER_CONSISTENCY_ONLY — NOT C3/C6 PROOF")
+          PY
+      - name: Upload generated synthetic evidence (not a production receipt)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase0-synthetic-ledger-${{ github.sha }}
+          path: kairoseed-phase0/ledger.jsonl
+          if-no-files-found: warn
