@@ -13,7 +13,15 @@ A prior local experiment used three Python child processes and a harmless shared
 | `kgs_003_evidence_002_results.json` | `5d7f708db495e6a22310a80c490e72195f430ff4d2846b3c3abdf9671b85a03f` |
 | `KGS-003-EVIDENCE-002-README.md` | `4a366d821c88dc5a892af332797ddac2b6cde2db7966e3575f269884e53742f4` |
 
-These are hashes of local conversation artifacts **observed during dossier preparation**. The underlying source script and raw 1,000-trial JSON are **not uploaded into this GitHub branch**. Therefore the digest entries are provenance pointers, not GitHub-accessible independent reproduction evidence.
+These SHA-256 values were computed from the previously generated local artifacts. On **2026-11-07**, all three original files were archived byte-for-byte in [`evidence/research/KGS-003-EVIDENCE-002/`](../../../evidence/research/KGS-003-EVIDENCE-002/) on the research branch, and their GitHub read-back contents matched the supplied files.
+
+- [Raw Python source](../../../evidence/research/KGS-003-EVIDENCE-002/kgs_003_evidence_002.py)
+- [Raw 1,000-trial JSON](../../../evidence/research/KGS-003-EVIDENCE-002/kgs_003_evidence_002_results.json)
+- [Original experiment README](../../../evidence/research/KGS-003-EVIDENCE-002/KGS-003-EVIDENCE-002-README.md)
+- [Source, artifact and environment provenance manifest](../../../evidence/research/KGS-003-EVIDENCE-002/PROVENANCE.json)
+- [Offline archive integrity checker](../../../evidence/research/KGS-003-EVIDENCE-002/verify_archive.py)
+
+The source and result bytes are now inspectable, but the historical execution environment was **not fully recorded** and this GitHub revision was committed **after** the sample run. Neither this archive nor its hashes prove pre-test claim freezing, original runtime identity, independent reproduction, eBPF enforcement, or C3/C6.
 
 ## Inspectable sample summary
 
@@ -29,6 +37,6 @@ The numbers were read from the preserved sample JSON; they are not a newly rerun
 
 This synthetic setup exhibits concurrent changes despite a cooperative pause request. Its measurements **do not establish atomic Freeze–Sign–Kill behavior, real JIREH runtime performance, eBPF signal semantics, or independently verified C3/C6 containment**.
 
-A peer reviewer needs the exact raw bytes, execution environment, validated code, and separate reproduction before upgrading even the synthetic empirical claim.
+A peer reviewer can now inspect the archived source and raw bytes, but the original runtime environment remains incompletely recorded, and separate reproduction and observational trust review remain outstanding. No broad assurance can be upgraded.
 
 **JIREH C3/C6 assurance remains NOT VERIFIED. No verified evidence → No PASS.**
