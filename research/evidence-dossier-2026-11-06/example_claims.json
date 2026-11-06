@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "claims": [
+    {
+      "id": "EXAMPLE-ONLY-C2",
+      "statement": "In one named isolated fixture, enumerated unauthorized attempts caused no independently observed prohibited effects.",
+      "scope": "EXAMPLE ONLY — not a real tested JIREH or production claim",
+      "falsifier": "Any observed unauthorized protected effect in that declared fixture",
+      "assumptions": [
+        "All relevant protected effects are captured by the named observation mechanism",
+        "The observer's trust assumptions are explicitly disclosed"
+      ]
+    }
+  ]
+}

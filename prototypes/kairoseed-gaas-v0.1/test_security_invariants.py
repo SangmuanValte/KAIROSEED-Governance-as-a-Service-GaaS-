@@ -1,6 +1,7 @@
 import json
 from hashlib import sha256
 import tempfile
+import sqlite3
 from concurrent.futures import ThreadPoolExecutor
 
 from kairoseed_gaas import ActionProposal, Decision, EvidenceLedger, govern, proposal_hash
@@ -56,15 +57,29 @@ def test_evidence_record_hash_reconstructs():
 
 
 def test_evidence_chain_detects_modified_record():
-    ledger = EvidenceLedger()
-    proposal = ActionProposal("agent-1", "read_report", "authorized", "v0.1")
-    govern(proposal, ledger)
-    govern(proposal, ledger)
+    # Mutating ledger.records only changes a detached snapshot, not stored SQLite.
+    # Use a disposable on-disk database and change the actual stored row instead.
+    with tempfile.TemporaryDirectory() as directory:
+        path = f"{directory}/tamper.sqlite3"
+        ledger = EvidenceLedger(path)
+        proposal = ActionProposal("agent-1", "read_report", "authorized", "v0.1")
+        govern(proposal, ledger)
+        govern(proposal, ledger)
 
-    original_hash = ledger.records[0]["record_hash"]
-    ledger.records[0]["reason"] = "tampered"
-    assert not ledger.verify_chain()
-    assert ledger.records[1]["previous_hash"] == original_hash
+        assert ledger.verify_chain()
+        original_hash = ledger.records[0]["record_hash"]
+        detached = ledger.records
+        detached[0]["reason"] = "changed_copy_only"
+        assert ledger.verify_chain()  # Negative control: detached copy is harmless.
+        ledger.close()
+
+        with sqlite3.connect(path) as conn:
+            conn.execute("UPDATE evidence SET reason = ? WHERE id = (SELECT MIN(id) FROM evidence)", ("tampered",))
+
+        reopened = EvidenceLedger(path)
+        assert not reopened.verify_chain()  # Persisted record was altered.
+        assert reopened.records[1]["previous_hash"] == original_hash
+        reopened.close()
 
 
 def test_concurrent_governance_preserves_chain():
