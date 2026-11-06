@@ -1,0 +1,32 @@
+name: KAIROSEED Evidence Dossier (Structural Checks Only)
+
+on:
+  pull_request:
+    paths:
+      - "research/evidence-dossier-2026-11-06/**"
+      - ".github/workflows/evidence-dossier.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-dossier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile offline validator and tests
+        run: |
+          python -m py_compile research/evidence-dossier-2026-11-06/tools/verify_bundle.py
+          python -m py_compile research/evidence-dossier-2026-11-06/tests/test_verify_bundle.py
+      - name: Execute structural/negative tests (NOT independent containment verification)
+        working-directory: research/evidence-dossier-2026-11-06
+        run: python -m unittest discover -s tests -v
+      - name: Show evidence boundary
+        run: |
+          echo "BUNDLE_STRUCTURAL_TESTS_ONLY"
+          echo "ASSURANCE=NOT_VERIFIED"
+          echo "PRODUCTION_AUTHORIZATION=NOT_GRANTED"
