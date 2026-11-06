@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - "docs/research/evidence-dossier-2026-11-06/**"
+      - "evidence/research/KGS-003-EVIDENCE-002/**"
       - "research/evidence_dossier/**"
       - "tests/test_evidence_dossier_preflight.py"
       - ".github/workflows/evidence-dossier-preflight.yml"
@@ -22,5 +23,7 @@ jobs:
           python-version: "3.12"
       - name: Check dossier metadata (NOT a security verdict)
         run: python research/evidence_dossier/preflight.py
+      - name: Verify archived synthetic artifact hashes and summary (NOT security proof)
+        run: python evidence/research/KGS-003-EVIDENCE-002/verify_archive.py
       - name: Test metadata preflight behavior
         run: python -m unittest discover -s tests -p test_evidence_dossier_preflight.py -v
