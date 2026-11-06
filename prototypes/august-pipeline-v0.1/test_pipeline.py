@@ -10,11 +10,15 @@ class GovernedPipelineTests(unittest.TestCase):
         self.assertEqual(evidence["result"], "execution_not_started")
         self.assertEqual(evidence["events"][-2]["stage"], "EXECUTE")
         self.assertEqual(evidence["events"][-2]["status"], "BLOCKED")
+        self.assertIsNone(evidence["lineage"]["execution_id"])
+        self.assertEqual(evidence["verification_status"], "NOT_RUN")
 
     def test_missing_permission_does_not_execute(self):
         evidence = run_pipeline(Proposal("permission test", True, False, "low", None))
         self.assertEqual(evidence["decision"], Decision.REVIEW.value)
         self.assertEqual(evidence["result"], "execution_not_started")
+        self.assertEqual(evidence["events"][-2]["status"], "HALTED")
+        self.assertIsNone(evidence["lineage"]["execution_id"])
 
     def test_missing_authorization_does_not_execute(self):
         evidence = run_pipeline(Proposal("authorization test", True, True, "low", None))
