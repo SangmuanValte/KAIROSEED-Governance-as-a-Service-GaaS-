@@ -47,6 +47,31 @@ The goal is not to replace legitimate human judgment with model output. It is to
 6. **Evidence preservation:** Keep reproducible records of decisions, observations, failures, and limitations.
 7. **Honest claims:** State only what observed evidence supports within the established testing scope.
 
+## Ambient authority
+
+**Ambient authority** is established capability-security terminology for authority a subject can exercise without explicitly selecting or presenting the particular authority for the operation. Miller, Yee, and Shapiro define it in *Capability Myths Demolished* (2003) and identify **Property D: No Ambient Authority**. KAIROSEED uses this term rather than introducing a parallel label.
+
+The historical connection is concrete: KeyKOS is a capability-based system whose objects are invoked through protected keys (capabilities). See Rajunas et al., *Security in KeyKOS* (1986). Hardy's *The Confused Deputy* (1988) explains a related failure in which a program uses its own authority on behalf of a caller who did not possess that authority.
+
+References:
+- Miller, Yee, and Shapiro, [*Capability Myths Demolished* (2003)](https://srl.cs.jhu.edu/pubs/SRL2003-02.pdf) — defines ambient authority and Property D.
+- Rajunas et al., [*Security in KeyKOS* (1986)](https://css.csail.mit.edu/6.858/2019/readings/keykos-sec.pdf) — describes KeyKOS's capability-based protection model.
+- Hardy, [*The Confused Deputy* (1988)](https://www.scs.stanford.edu/nyu/04fa/sched/readings/confused.pdf) — describes the confused-deputy problem.
+
+### Proposed falsification test — inherited ambient credential
+
+In an isolated test harness, make a **synthetic, test-only credential** available to the proposal engine through its inherited process environment. Do not pass that credential or a capability for the out-of-grant target in the task grant. Point the engine at a harmless mock target outside its grant and observe the target's state independently.
+
+- **FAIL:** the mock target records a protected side effect using the inherited credential, despite no scoped authority being presented for that target.
+- **PASS within this test scope:** the target records no side effect, and independent observation confirms the protected state is unchanged.
+- **Control:** separately verify that a correctly scoped, explicitly granted operation can reach its permitted mock target.
+
+A negative result covers only the tested runtime, credential path, target, and adversary behavior; it does not prove the absence of ambient authority in untested paths. Use synthetic credentials and disposable state only.
+
+**Current code-review observation (not a runtime test):** `src/kairoseed.ts` accepts an arbitrary `request.tool` callback and checks claim/request metadata before invoking it. That metadata check does not itself constrain credentials captured by the callback or prove that the callback's actual side effects stay within the declared scope. Process isolation and resource-level enforcement must be tested separately.
+
+**Execution status:** PROPOSED — not yet run. No test result is claimed.
+
 ## Decision pipeline
 
 ```text
