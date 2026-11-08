@@ -8,7 +8,8 @@ For a KAIROSEED PASS to be meaningful within this research scope, the append-onl
 
 ## Scope and linked test obligations
 
-- [Issue #30 — Independent Containment Verification](https://github.com/SangmuanValte/KAIROSEED-Governance-as-a-Service-GaaS-/issues/30) contains a **proposed ten-row minimum falsification matrix** covering valid and invalid grants, revocation/expiry, substitution, replay/concurrency, alternate routes, TOCTOU, write-and-restore, external effects, and missing/tampered evidence. It is an open research issue, not a frozen canonical contract or evidence of completed tests.
+- [Independent Containment & Observation Falsification Matrix v1.0](matrices/independent-containment-observation-matrix-v1.0.md) — ten scenarios, expected observations, closure evidence, verdict contract, and pre-run commitment requirements. Its content snapshot is recorded in [the v1.0 freeze record](freezes/independent-containment-matrix-v1.0-freeze.md). This is a non-canonical research test contract, not proof that the scenarios have been executed or passed.
+- [Issue #30 — Independent Containment Verification](https://github.com/SangmuanValte/KAIROSEED-Governance-as-a-Service-GaaS-/issues/30) — originating research issue and expanded assurance protocol.
 - [`docs/THREAT_MODEL.md`](../THREAT_MODEL.md) currently lists eight reference-adapter authorization-boundary cases; it does not establish trajectory completeness.
 - [`docs/astra/control-hypothesis.md`](../../astra/control-hypothesis.md) defines T01–T08 control hypotheses. The separately recorded ASTRA T01–T04 evidence is limited to those four reference-control tests.
 - This document names a bounded threat model and required observations. It does not establish that the ledger, eBPF/seccomp instrumentation, independent observer, or any production deployment currently satisfies them.
