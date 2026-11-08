@@ -8,6 +8,25 @@ KAIROSEED is an experimental, verification-first governance framework for AI-ass
 
 > **Repository boundary:** This is a reference implementation and research workspace, **not proof of a production security deployment**.
 
+
+## Verification status vocabulary
+
+**Dated: 2026-11-09**
+
+Use the following four statuses when recording the verification state of a component, interface, seam, or security requirement. Record the status against a defined claim, scope, and evidence set; do not use a status as a substitute for those details.
+
+| Status | Definition | Minimum basis |
+|---|---|---|
+| **NOT VERIFIED** | Available evidence does not establish whether the requirement is satisfied. | No sufficient verification evidence. This includes an interface with no named owner or no documented seam contract. |
+| **VERIFIED** | The specified requirement passed its defined acceptance tests within the recorded scope and assumptions. | Reproducible test results and inspectable evidence. This does not imply universal security. |
+| **FAILED** | Evidence demonstrates that the specified requirement was violated. | An observed counterexample or failed acceptance criterion, with supporting evidence. |
+| **BLOCKED** | Verification or acceptance cannot proceed because a required prerequisite is unavailable or unmet. | A named blocking prerequisite and its effect on the verification activity. |
+
+**Inventory rule:** A seam with no named owner is recorded as **NOT VERIFIED**, with owner **UNASSIGNED** and evidence **NONE**. Missing ownership or missing evidence is not, by itself, proof that the seam is technically broken and must not automatically be recorded as **FAILED** or assigned an unsupported risk rating.
+
+**Status discipline:** **NOT VERIFIED** means the claim remains unestablished; **FAILED** means a violation has been observed; **BLOCKED** means a required step cannot proceed. Do not collapse these states. Record exclusions separately as **OUT OF SCOPE**; this is a scope designation, not a fifth verification status.
+
+
 ## Start a bounded task
 
 Use [WORKING_CONTEXT.md](WORKING_CONTEXT.md) for a small starting context covering code, documentation, preparation, memory, and releases. The [context-to-release workflow](docs/workflow/context-to-release.md) includes reproducible packaging and a short session handoff. Its documentation prerelease does not establish application or production readiness.
