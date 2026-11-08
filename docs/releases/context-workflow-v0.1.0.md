@@ -15,6 +15,8 @@ This release provides a short, reusable starting context for code, documentation
 
 The repository also corrects an older workflow's output from `INDEPENDENT_VERIFICATION=PASS` to `CI_VERIFICATION=PASS` and `INDEPENDENT_VERIFICATION=NOT_ASSESSED`. That older workflow is not executed by this release.
 
+An existing August prototype test expected `BLOCKED` where the documented lineage model emits `HALTED`. The assertion is aligned with that contract and now also checks absent execution/verification identifiers and `NOT_RUN` verification. The simulator implementation is unchanged; this is a test-contract correction, not evidence of real runtime containment.
+
 ## Evidence and limits
 
 The release workflow must pass the scoped packaging tests before publication. Inspect the actual workflow run for the observed result, Python version, and commit. The manifest binds packaged bytes to the release commit, and the ZIP includes its manifest.
