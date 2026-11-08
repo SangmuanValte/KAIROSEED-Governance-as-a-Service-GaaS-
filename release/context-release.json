@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "release_id": "context-workflow-v0.1.0",
+  "scope": "documentation-and-local-workflow",
+  "notes": "docs/releases/context-workflow-v0.1.0.md",
+  "foundation": {
+    "path": "docs/foundations/created-time-and-appointed-arrival.md",
+    "sha256": "f16e96b920d1af4a68dbe66fe548db9b32ec12a2a29b213c540123508b07c5b1"
+  },
+  "files": [
+    "LICENSE",
+    "WORKING_CONTEXT.md",
+    "docs/foundations/created-time-and-appointed-arrival.md",
+    "docs/workflow/context-to-release.md",
+    "docs/workflow/session-handoff-template.md",
+    "docs/releases/context-workflow-v0.1.0.md",
+    "release/context-release.json",
+    "tools/context_release.py",
+    "tests/test_context_release.py",
+    ".github/workflows/context-release.yml"
+  ]
+}

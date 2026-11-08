@@ -8,6 +8,10 @@ KAIROSEED is an experimental, verification-first governance framework for AI-ass
 
 > **Repository boundary:** This is a reference implementation and research workspace, **not proof of a production security deployment**.
 
+## Start a bounded task
+
+Use [WORKING_CONTEXT.md](WORKING_CONTEXT.md) for a small starting context covering code, documentation, preparation, memory, and releases. The [context-to-release workflow](docs/workflow/context-to-release.md) includes reproducible packaging and a short session handoff. Its documentation prerelease does not establish application or production readiness.
+
 ## Vision
 
 AI offers students, graduates, researchers, and builders opportunities to learn practical skills, create useful tools, and improve productivity. KAIROSEED encourages adapting to technological change while taking risks of errors, misuse, displacement, and loss of control seriously.
