@@ -46,7 +46,8 @@ jobs:
         run: |
           echo "RELEASE_COMMIT=${GITHUB_SHA}"
           echo "ARTIFACT_SHA256=$(cut -d' ' -f1 SHA256SUMS)"
-          echo "INDEPENDENT_VERIFICATION=PASS"
+          echo "CI_VERIFICATION=PASS"
+          echo "INDEPENDENT_VERIFICATION=NOT_ASSESSED"
 
   deployment:
     needs: verify

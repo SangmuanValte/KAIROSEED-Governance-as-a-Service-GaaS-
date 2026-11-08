@@ -1,0 +1,95 @@
+name: Context and Foundation Release
+
+on:
+  pull_request:
+    paths:
+      - "WORKING_CONTEXT.md"
+      - "docs/foundations/created-time-and-appointed-arrival.md"
+      - "docs/workflow/**"
+      - "docs/releases/context-workflow-*.md"
+      - "release/context-release.json"
+      - "tools/context_release.py"
+      - "tests/test_context_release.py"
+      - ".github/workflows/context-release.yml"
+      - "LICENSE"
+  push:
+    branches: [main]
+    paths: ["release/context-release.json"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: context-release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Verify and test only this release package
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 --version
+          python3 tools/context_release.py verify
+          python3 -m unittest discover -s tests -p test_context_release.py -v
+          python3 tools/context_release.py build --source-commit "$GITHUB_SHA" --out "$RUNNER_TEMP/context-verify"
+          python3 tools/context_release.py check "$RUNNER_TEMP/context-verify/$(python3 -c 'import json; print(json.load(open("release/context-release.json"))["release_id"])').zip"
+
+  publish:
+    needs: verify
+    if: github.repository == 'SangmuanValte/KAIROSEED-Governance-as-a-Service-GaaS-' && github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Recheck exact release inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 --version
+          python3 -m unittest discover -s tests -p test_context_release.py -v
+          python3 tools/context_release.py build --source-commit "$GITHUB_SHA" --out "$RUNNER_TEMP/context-release"
+      - name: Publish scoped prerelease and inspect assets
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          release_tag="$(python3 -c 'import json; print(json.load(open("release/context-release.json"))["release_id"])')"
+          notes_path="$(python3 -c 'import json; print(json.load(open("release/context-release.json"))["notes"])')"
+          if gh release view "$release_tag" >/dev/null 2>&1; then
+            echo "Release already exists; inspect it and use a new version."
+            exit 1
+          fi
+          if gh api "repos/$GH_REPO/git/ref/tags/$release_tag" >/dev/null 2>&1; then
+            echo "Tag already exists; refusing to reuse it."
+            exit 1
+          fi
+          gh release create "$release_tag" \
+            "$RUNNER_TEMP/context-release/$release_tag.zip" \
+            "$RUNNER_TEMP/context-release/MANIFEST.json" \
+            "$RUNNER_TEMP/context-release/SHA256SUMS" \
+            --target "$GITHUB_SHA" --prerelease --latest=false \
+            --title "KAIROSEED Context and Workflow $release_tag" \
+            --notes-file "$notes_path"
+          published_sha="$(gh api "repos/$GH_REPO/git/ref/tags/$release_tag" --jq '.object.sha')"
+          test "$published_sha" = "$GITHUB_SHA"
+          gh release download "$release_tag" --dir "$RUNNER_TEMP/context-download"
+          cmp "$RUNNER_TEMP/context-release/SHA256SUMS" "$RUNNER_TEMP/context-download/SHA256SUMS"
+          (cd "$RUNNER_TEMP/context-download" && sha256sum --check SHA256SUMS)
+          python3 tools/context_release.py check "$RUNNER_TEMP/context-download/$release_tag.zip"
+          gh release view "$release_tag" --json url,tagName,isPrerelease,assets
