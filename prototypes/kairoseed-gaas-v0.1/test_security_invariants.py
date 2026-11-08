@@ -1,4 +1,5 @@
 import json
+import sqlite3
 from hashlib import sha256
 import tempfile
 from concurrent.futures import ThreadPoolExecutor
@@ -56,15 +57,48 @@ def test_evidence_record_hash_reconstructs():
 
 
 def test_evidence_chain_detects_modified_record():
-    ledger = EvidenceLedger()
-    proposal = ActionProposal("agent-1", "read_report", "authorized", "v0.1")
-    govern(proposal, ledger)
-    govern(proposal, ledger)
+    with tempfile.TemporaryDirectory() as directory:
+        path = f"{directory}/tamper.sqlite3"
+        ledger = EvidenceLedger(path)
+        try:
+            proposal = ActionProposal("agent-1", "read_report", "authorized", "v0.1")
+            govern(proposal, ledger)
+            govern(proposal, ledger)
+            assert ledger.verify_chain()
+            original_hash = ledger.records[0]["record_hash"]
 
-    original_hash = ledger.records[0]["record_hash"]
-    ledger.records[0]["reason"] = "tampered"
-    assert not ledger.verify_chain()
-    assert ledger.records[1]["previous_hash"] == original_hash
+            # Mutate persisted evidence through a separate connection. The
+            # records property returns snapshots, so editing it cannot tamper
+            # with the underlying ledger.
+            with sqlite3.connect(path) as connection:
+                changed = connection.execute(
+                    "UPDATE evidence SET reason = ? WHERE id = (SELECT MIN(id) FROM evidence)",
+                    ("tampered",),
+                )
+                assert changed.rowcount == 1
+            with sqlite3.connect(path) as connection:
+                reason = connection.execute(
+                    "SELECT reason FROM evidence ORDER BY id LIMIT 1"
+                ).fetchone()[0]
+            assert reason == "tampered"
+            assert ledger.records[0]["reason"] == "tampered"
+            assert not ledger.verify_chain()
+            assert ledger.records[1]["previous_hash"] == original_hash
+        finally:
+            ledger.close()
+
+
+def test_records_snapshot_does_not_mutate_storage():
+    ledger = EvidenceLedger()
+    try:
+        govern(ActionProposal("agent-1", "read_report", "authorized", "v0.1"), ledger)
+        snapshot = ledger.records
+        original_reason = snapshot[0]["reason"]
+        snapshot[0]["reason"] = "changed_copy"
+        assert ledger.records[0]["reason"] == original_reason
+        assert ledger.verify_chain()
+    finally:
+        ledger.close()
 
 
 def test_concurrent_governance_preserves_chain():
