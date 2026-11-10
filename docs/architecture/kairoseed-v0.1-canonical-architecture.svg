@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#06111b"/>
+      <stop offset="1" stop-color="#07101f"/>
+    </linearGradient>
+    <style>
+      .t{font-family:Inter,Segoe UI,Arial,sans-serif;fill:#eaf3ff}
+      .muted{fill:#a7bfd5}
+      .mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+      .h1{font-size:54px;font-weight:700}
+      .h2{font-size:28px;font-weight:700}
+      .h3{font-size:20px;font-weight:700}
+      .body{font-size:18px}
+      .small{font-size:15px}
+      .panel{rx:18;ry:18;stroke-width:2;fill-opacity:.16}
+    </style>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+
+  <text x="800" y="66" text-anchor="middle" class="t h1">KAIROSEED v0.1</text>
+  <text x="800" y="104" text-anchor="middle" class="t muted body mono">H_0 + f28a4bba (Canonical)</text>
+
+  <rect x="350" y="128" width="900" height="66" rx="16" fill="#0b1725" stroke="#627b96" stroke-width="2"/>
+  <text x="800" y="171" text-anchor="middle" class="t h2">
+    Legitimate Act: C ⊆ E ⊆ S_auth ∧ Receipt Present
+  </text>
+
+  <!-- Capacity -->
+  <rect x="30" y="225" width="365" height="505" class="panel" fill="#0a4c86" stroke="#1fb6ff"/>
+  <text x="212" y="265" text-anchor="middle" class="t h2" fill="#57c7ff">1. CAPACITY</text>
+  <text x="212" y="295" text-anchor="middle" class="t body">Reasoning and Acting</text>
+
+  <text x="55" y="340" class="t h3">Reasoning — PTZ curvature</text>
+  <text x="55" y="375" class="t body mono">κ = |D²φ| / (1 + |Dφ|²)^(3/2)</text>
+  <text x="55" y="408" class="t body">W = 500 · k = 20 · dim = 3</text>
+
+  <line x1="55" y1="438" x2="370" y2="438" stroke="#1fb6ff" opacity=".45"/>
+
+  <text x="55" y="478" class="t h3">Acting — measured prototype</text>
+  <text x="55" y="512" class="t body">• RAG 21 MB sequence · 6 ms · HITM 12%</text>
+  <text x="55" y="545" class="t body">• 270M Q4 · 4.2 ms/token · 0.5 mJ/token</text>
+  <text x="55" y="578" class="t body">• HITM 2%</text>
+  <text x="55" y="611" class="t body">• 4 threads · 5.85× speedup</text>
+  <text x="55" y="644" class="t body">• N* = 114 threshold</text>
+  <text x="55" y="677" class="t body">• PARK = 0 W (honest E0)</text>
+
+  <!-- Measurement -->
+  <rect x="415" y="225" width="365" height="505" class="panel" fill="#0b6b43" stroke="#22e88a"/>
+  <text x="597" y="265" text-anchor="middle" class="t h2">2. MEASUREMENT</text>
+  <text x="597" y="295" text-anchor="middle" class="t body">σ* Transition Vector</text>
+  <text x="445" y="340" class="t body mono">σ* = [σ_op, σ_obs, σ_info, σ_curv, Δ_obs*]</text>
+  <text x="445" y="385" class="t body">σ_op — operator/resolvent gap closure</text>
+  <text x="445" y="418" class="t small muted">(Ulam 100-bin)</text>
+  <text x="445" y="458" class="t body">σ_obs — observable variance / AC1 peak</text>
+  <text x="445" y="498" class="t body">σ_info — Fisher / susceptibility peak</text>
+  <text x="445" y="538" class="t body">σ_curv — PTZ zero-crossing + max dκ/dr</text>
+  <text x="445" y="578" class="t body">Δ_obs* = σ_obs* − σ_dyn*</text>
+  <text x="445" y="611" class="t small muted">observability displacement</text>
+  <text x="445" y="650" class="t body">latent inside ≠ authorized outside</text>
+
+  <!-- Governance -->
+  <rect x="800" y="225" width="365" height="505" class="panel" fill="#725c00" stroke="#ffd62f"/>
+  <text x="982" y="265" text-anchor="middle" class="t h2">3. GOVERNANCE</text>
+  <text x="982" y="295" text-anchor="middle" class="t body">Conditions for Legitimate Act</text>
+  <text x="982" y="340" text-anchor="middle" class="t h2 mono">C ⊆ E ⊆ S_auth</text>
+
+  <text x="830" y="390" class="t h3">GOVANA — pre-execution</text>
+  <text x="830" y="425" class="t body">• Enforces E ⊆ S_auth</text>
+  <text x="830" y="458" class="t body">• OPA Rego + cryptographic mapping</text>
+  <text x="830" y="491" class="t body">• Epoch-k whitelist binding</text>
+  <text x="830" y="524" class="t body">• Historical k−1 token invalid in k</text>
+
+  <line x1="830" y1="550" x2="1135" y2="550" stroke="#ffd62f" opacity=".45"/>
+
+  <text x="830" y="592" class="t h3">JIREH — post-authorization</text>
+  <text x="830" y="627" class="t body">• Enforces C ⊆ E</text>
+  <text x="830" y="660" class="t body">• eBPF probes + Lyapunov dissipation</text>
+  <text x="830" y="693" class="t body">• Claim &gt; Evidence → namespace terminate</text>
+
+  <!-- Evidence -->
+  <rect x="1185" y="225" width="385" height="505" class="panel" fill="#4b2378" stroke="#ae64ff"/>
+  <text x="1377" y="265" text-anchor="middle" class="t h2">4. EVIDENCE &amp; RECEIPTS</text>
+  <text x="1377" y="295" text-anchor="middle" class="t body">Durable · Verifiable · Offline</text>
+  <text x="1215" y="345" class="t body mono">receipt_v1.json</text>
+  <text x="1215" y="378" class="t small muted">trace_id: op_7f9ab3...</text>
+  <text x="1215" y="425" class="t body mono">ledger_hash: 0x9f3b27...</text>
+  <text x="1215" y="472" class="t body mono">library-backup-import.json</text>
+  <text x="1215" y="505" class="t small muted">Merkle 14/14 · 42 ms offline verify</text>
+  <text x="1215" y="552" class="t body">TPM PCR: a3f9...e21c</text>
+  <text x="1215" y="585" class="t body">W_attestation: vea-prod-01 · ed25519</text>
+  <text x="1215" y="632" class="t body mono">ASK_2_dignity.md</text>
+  <text x="1215" y="679" class="t body mono">power.log · E0 = 0 W</text>
+
+  <!-- Formal + DoD -->
+  <rect x="30" y="755" width="500" height="165" rx="16" fill="#16101b" stroke="#ff5d82" stroke-width="2"/>
+  <text x="55" y="795" class="t h3">FORMAL ASSURANCE</text>
+  <text x="55" y="833" class="t small mono">theorem legitimate_act :</text>
+  <text x="55" y="860" class="t small mono">  Production act →</text>
+  <text x="55" y="887" class="t small mono">  C⊆E ∧ E⊆S_auth ∧ receipt present</text>
+
+  <rect x="550" y="755" width="500" height="165" rx="16" fill="#071a1d" stroke="#28d4c7" stroke-width="2"/>
+  <text x="575" y="795" class="t h3">DEFINITION OF DONE</text>
+  <text x="575" y="833" class="t small">Executable --offline --verify-tpm · measurable ±CI</text>
+  <text x="575" y="860" class="t small">Falsifiable 3 injections · offline review 42 ms</text>
+  <text x="575" y="887" class="t small">Empirically instrumentable eBPF + power + ledger</text>
+
+  <rect x="1070" y="755" width="500" height="165" rx="16" fill="#0b1422" stroke="#37a5ff" stroke-width="2"/>
+  <text x="1095" y="795" class="t h3">CORE PRINCIPLES</text>
+  <text x="1095" y="833" class="t small">Capacity without governance = hallucinated authority.</text>
+  <text x="1095" y="860" class="t small">Governance without capacity = no act.</text>
+  <text x="1095" y="887" class="t small">Together = testable and constrained enough to fail in public.</text>
+
+  <rect x="30" y="942" width="1540" height="42" rx="12" fill="#062117" stroke="#2cef82" stroke-width="2"/>
+  <text x="800" y="971" text-anchor="middle" class="t h3">lake build PASS = Capacity Present ∧ Governance Present · v0.1 ARCHITECTURE FROZEN</text>
+</svg>
