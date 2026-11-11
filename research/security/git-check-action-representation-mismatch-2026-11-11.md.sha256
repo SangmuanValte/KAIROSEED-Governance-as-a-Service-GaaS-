@@ -1,0 +1,10 @@
+SHA256 (git-check-action-representation-mismatch-2026-11-11.md) = bda96ba44619ed673ff3379ce5f66253aaa9a9d7c213fcef4c52ea7f92d0787b
+
+Artifact: research/security/git-check-action-representation-mismatch-2026-11-11.md
+Algorithm: SHA-256
+Input: exact UTF-8 file bytes, including final newline
+Research date: 2026-11-11
+Paper commit: 7fafcb53594564ffad798695fc31314b5d0afc60
+Git blob SHA-1 (Git object identifier, not the SHA-256 digest): fc6b650f719bb1790c00eabee396c87bb81a1c2c
+Verification: local digest computed from the authored UTF-8 content; GitHub fetch returned the matching Git blob SHA-1.
+Status: SOURCE-GROUNDED RESEARCH DRAFT; NOT INDEPENDENTLY REPRODUCED.
