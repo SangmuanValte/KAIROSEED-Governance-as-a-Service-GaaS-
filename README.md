@@ -47,6 +47,28 @@ The goal is not to replace legitimate human judgment with model output. It is to
 6. **Evidence preservation:** Keep reproducible records of decisions, observations, failures, and limitations.
 7. **Honest claims:** State only what observed evidence supports within the established testing scope.
 
+## Innovation and evidence principle
+
+Genuine innovation does not necessarily require inventing an entirely new concept. It can emerge from introducing a new capability, architecture, methodology, or relationship between existing components that produces meaningful and demonstrable improvements.
+
+Integrating AI can therefore be part of genuine innovation. The innovation claim concerns what the integration materially changes and what improvement it produces—not the presence of an AI model, API, or AI label by itself. Integration alone is not proof of originality, usefulness, or reliability.
+
+These are three distinct research responsibilities and must not be treated as interchangeable:
+
+| Research claim | Required responsibility | Core question | Appropriate evidence |
+|---|---|---|---|
+| **Novelty** | **Investigate** | Is the claimed contribution materially differentiated from prior work? | Prior-art and literature review, comparison with existing approaches, and a clearly bounded account of the difference. |
+| **Usefulness** | **Demonstrate** | Does the contribution solve a meaningful problem or produce a meaningful improvement? | A working implementation, defined use cases, measurable outcomes, and relevant comparisons. |
+| **Reliability** | **Verify** | Does the system satisfy its stated requirements within the declared scope and assumptions? | Reproducible tests, failure analysis, inspectable evidence, and independent evaluation where claimed. |
+
+**Claim discipline:** Novelty is a claim to investigate; usefulness is a claim to demonstrate; reliability is a claim to verify. None is established merely by proposing an architecture, integrating an existing technology, presenting a successful demo, or reporting an internal PASS.
+
+For KAIROSEED, a proposed architectural contribution must be compared with relevant prior art; its practical value must be demonstrated against meaningful alternatives; and its authorization, enforcement, and containment properties must be tested within an explicit threat model. Independent verification must use evidence sufficiently independent of the component being evaluated.
+
+**Status:** RESEARCH PRINCIPLE — articulated for investigation and evaluation. This section does not assert that KAIROSEED's novelty has been established, its usefulness demonstrated, or its reliability independently verified. It grants no authorization and makes no production-readiness claim.
+
+> **Integration can be the vehicle of innovation, but integration alone is not proof of innovation.**
+
 ## Ambient authority
 
 **Ambient authority** is established capability-security terminology for authority a subject can exercise without explicitly selecting or presenting the particular authority for the operation. Miller, Yee, and Shapiro define it in *Capability Myths Demolished* (2003) and identify **Property D: No Ambient Authority**. KAIROSEED uses this term rather than introducing a parallel label.
