@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.0",
+  "library": "KAIROSEED R&D internal library",
+  "initialized_on": "2026-10-04",
+  "mode": "STACK_PARK_PRESERVE",
+  "governing_principle": "Claim <= Evidence <= Established Scope",
+  "baseline": {
+    "repository": "SangmuanValte/KAIROSEED-Governance-as-a-Service-GaaS-",
+    "branch": "main",
+    "commit": "384cc7025a07de8cab9dac4d5a0bfa3cc450d488",
+    "review_branch": "rd-proof-2026-10-04",
+    "draft_pr": 26
+  },
+  "permissions": {
+    "index_is_authorization": false,
+    "execute_from_index": false,
+    "auto_promote_to_pass": false,
+    "merge_automatically": false,
+    "deploy_automatically": false
+  },
+  "entries": [
+    {
+      "id": "KSL-001",
+      "kind": "code",
+      "title": "KAIROSEED agent authorization reference adapter",
+      "path": "src/kairoseed.ts",
+      "status": "REFERENCE_CODE",
+      "claims_allowed": "Reference implementation is present, not verified for production",
+      "limitations": [
+        "non-atomic single-use claim consumption",
+        "outcome ambiguity following tool errors"
+      ]
+    },
+    {
+      "id": "KSL-002",
+      "kind": "document",
+      "title": "Adapter architecture and boundary",
+      "path": "docs/ADAPTER.md",
+      "status": "SPECIFIED",
+      "claims_allowed": "Design documented; no execution proof implied"
+    },
+    {
+      "id": "KSL-003",
+      "kind": "document",
+      "title": "Threat model and eight planned cases",
+      "path": "docs/THREAT_MODEL.md",
+      "status": "SPECIFIED",
+      "claims_allowed": "Expected cases documented; passing outcomes not established"
+    },
+    {
+      "id": "KSL-004",
+      "kind": "document",
+      "title": "Evidence schema and observer procedure",
+      "path": "docs/EVIDENCE.md",
+      "status": "SPECIFIED",
+      "claims_allowed": "Procedure documented, independent verification not certified"
+    },
+    {
+      "id": "KSL-005",
+      "kind": "document",
+      "title": "Broader architecture document",
+      "path": "docs/ARCHITECTURE.md",
+      "status": "INDEXED",
+      "claims_allowed": "File path observed; claims within not audited in this record"
+    },
+    {
+      "id": "KSL-006",
+      "kind": "document",
+      "title": "Validation boundary document",
+      "path": "governance/VALIDATION_BOUNDARY_v0.3.md",
+      "status": "INDEXED",
+      "claims_allowed": "File path observed; claims within not audited in this record"
+    },
+    {
+      "id": "KSL-007",
+      "kind": "test-source",
+      "title": "Existing Python tests",
+      "path": "tests/test_core.py",
+      "status": "INDEXED",
+      "claims_allowed": "Test source is present; no passing test claim"
+    },
+    {
+      "id": "KSL-008",
+      "kind": "observed-result",
+      "title": "Latest reviewed CI baseline failure",
+      "url": "https://github.com/SangmuanValte/KAIROSEED-Governance-as-a-Service-GaaS-/actions/runs/36940347874",
+      "commit": "384cc7025a07de8cab9dac4d5a0bfa3cc450d488",
+      "status": "OBSERVED_FAIL",
+      "observations": [
+        "dependency install succeeded",
+        "source compilation succeeded",
+        "full test suite failed",
+        "production metadata verification skipped",
+        "immutable run identity skipped"
+      ],
+      "unknowns": [
+        "exact failing assertion not recovered"
+      ]
+    },
+    {
+      "id": "KSL-009",
+      "kind": "evidence-record",
+      "title": "Independent-style R&D operational proof",
+      "path": "evidence/RD-2026-10-04/OPERATIONAL_PROOF.md",
+      "status": "UNVERIFIED",
+      "claims_allowed": "Record of evidence and unresolved findings; not an independent proof"
+    },
+    {
+      "id": "KSL-010",
+      "kind": "unresolved-judgment",
+      "title": "Single-use claim concurrency safety",
+      "source": "src/kairoseed.ts",
+      "status": "PARKED",
+      "required_future_evidence": "atomic consume/lease design and controlled concurrent regression test with independent protected-state observation"
+    },
+    {
+      "id": "KSL-011",
+      "kind": "unresolved-judgment",
+      "title": "State outcome after callback throws",
+      "source": "src/kairoseed.ts",
+      "status": "PARKED",
+      "required_future_evidence": "tool-failure fixture and independent before/after protected-state checks"
+    },
+    {
+      "id": "KSL-012",
+      "kind": "research-hypothesis",
+      "title": "Sigma-star / transfer operator diagnostics",
+      "status": "PARKED",
+      "source_status": "historical conversation reports only; original experiment artifacts not indexed here",
+      "required_future_evidence": "import original runs and compare with reproducible change-point baselines"
+    }
+  ]
+}
