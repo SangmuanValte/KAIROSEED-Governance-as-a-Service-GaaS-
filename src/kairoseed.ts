@@ -48,7 +48,7 @@ export interface EvidenceEvent {
 
 export interface ClaimStore {
   get(id: string): Promise<Claim | undefined> | Claim | undefined;
-  save?(claim: Claim): Promise<void> | void;
+  save(claim: Claim): Promise<void> | void;
 }
 
 export interface EvidenceSink {
@@ -226,7 +226,7 @@ export class Kairoseed {
 
     if (claim.singleUse) {
       claim.status = "USED";
-      await this.options.claims.save?.(claim);
+      await this.options.claims.save(claim);
     }
 
     const resultHash = await sha256(stableSerialize(value));
