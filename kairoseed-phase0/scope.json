@@ -1,0 +1,24 @@
+{
+  "schema": "kairoseed-phase0-scope-v0.1",
+  "environment": "SYNTHETIC_ONLY",
+  "principal_id": "principal-test-001",
+  "purpose": "synthetic_document_share_test",
+  "allowed_resources": [
+    "doc_A",
+    "doc_B"
+  ],
+  "allowed_actions": [
+    "share"
+  ],
+  "allowed_delta": {
+    "doc_A": true,
+    "doc_B": true
+  },
+  "max_changes_per_action": 1,
+  "max_duration_ms": 60000,
+  "fixture_baseline": {
+    "doc_A": false,
+    "doc_B": false
+  },
+  "human_authorization": "TEST_FIXTURE_ONLY_NOT_PRODUCTION"
+}
