@@ -1,0 +1,84 @@
+{
+  "schema": "kairoseed-synthetic-evidence-provenance-v0.1",
+  "experiment": "KGS-003-EVIDENCE-002",
+  "record_date": "2026-11-07",
+  "record_type": "post-hoc research provenance inventory",
+  "assurance": "NOT_VERIFIED",
+  "scope": "SYNTHETIC_ONLY",
+  "original_claim_freeze": "NOT_ESTABLISHED",
+  "canonical_specification": "FROZEN_UNCHANGED",
+  "source_repository": "SangmuanValte/KAIROSEED-Governance-as-a-Service-GaaS-",
+  "source_revision_commit": "cb1df2d88626394d6be80651683bbf13a19f4719",
+  "source_revision_limitation": "The GitHub commit archives already-existing local files after the recorded synthetic run. It is not a pre-test source or claim commitment.",
+  "files": {
+    "kgs_003_evidence_002.py": {
+      "sha256": "1e33fed887deca926b8478dc6bb4cb4eb1c6f28852bb5dbf7a5c2727af22bbf8",
+      "size_bytes": 10246,
+      "git_blob_sha": "70843c2a8ffcdc06ff61fdfd4ca174fa607b9e1b"
+    },
+    "kgs_003_evidence_002_results.json": {
+      "sha256": "5d7f708db495e6a22310a80c490e72195f430ff4d2846b3c3abdf9671b85a03f",
+      "size_bytes": 516640,
+      "git_blob_sha": "01f3d0a8474b78f15b3e511e52578fe4cc5967e3"
+    },
+    "KGS-003-EVIDENCE-002-README.md": {
+      "sha256": "4a366d821c88dc5a892af332797ddac2b6cde2db7966e3575f269884e53742f4",
+      "size_bytes": 3104,
+      "git_blob_sha": "2b96c40caf0a46c416f0ce6728a04ef5cb5095bf"
+    }
+  },
+  "run": {
+    "original_execution_timestamp": "NOT_INDEPENDENTLY_RECORDED",
+    "original_python_version": "NOT_RECORDED",
+    "original_os_and_kernel": "NOT_RECORDED",
+    "original_cpu_topology": "NOT_RECORDED",
+    "environment_limits": "The README only identifies an earlier execution environment, not its reproducibly pinned packages, host load or kernel details. No source control revision is independently established as preceding the run.",
+    "declared_source_requirements": "Python 3.9 or newer, standard library only",
+    "command_from_readme": "python kgs_003_evidence_002.py --trials 1000 --window-us 1000 --seed 303 --output results.json",
+    "source_mechanism": "Three child processes; cooperative pause, mutator, and observer sharing a local test buffer; no kernel freeze",
+    "result_config": {
+      "trials": 1000,
+      "race_window_us": 1000,
+      "buffer_bytes": 512,
+      "random_seed": 303
+    }
+  },
+  "review": {
+    "date": "2026-11-07",
+    "method": "Local SHA-256 and JSON semantic consistency verification of pre-existing files; GitHub read-back equality checked after archival.",
+    "validation_environment": {
+      "python": "CPython 3.13.5",
+      "os": "Linux",
+      "kernel": "6.18.57",
+      "machine": "x86_64"
+    },
+    "limitation": "Validation environment is not claimed to be the experiment's original execution environment."
+  },
+  "measured_results": {
+    "total_trials": 1000,
+    "in_window": 971,
+    "out_of_window": 29,
+    "clean": 0,
+    "mutated": 737,
+    "corrupted": 234,
+    "trials_with_post_request_completed_writes": 999,
+    "counter_delta_total": 10254,
+    "counter_delta_max": 22,
+    "freeze_request_to_stop_observed_ms": {
+      "median": 1.266807,
+      "p95": 1.607516,
+      "p99": 2.25534,
+      "max": 1384.739775
+    }
+  },
+  "admissible_conclusion": "Stored results are internally consistent and demonstrate synthetic cooperative-stop race behavior under the recorded settings; not proof of JIREH, eBPF/seccomp, kernel isolation, atomicity, or C3/C6 assurance.",
+  "unsupported_claims": [
+    "Kernel freeze speed",
+    "Independent real-world runtime containment",
+    "Atomic Freeze-Sign-Kill",
+    "Pre-test frozen claim/commit",
+    "Independent replication",
+    "Production approval"
+  ],
+  "future_reproduction": "Re-run on a declared, isolated system with recorded command, exact source commit, Python/OS/kernel details, and independently preserved raw outputs. Treat each new run as separately versioned evidence."
+}

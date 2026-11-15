@@ -1,0 +1,134 @@
+{
+  "schema": "kairoseed-research-dossier-v0.1",
+  "date": "2026-11-06",
+  "base_commit": "9b846da128e2ff325297dfde4a0860267e545313",
+  "canonical_specification": "FROZEN_UNCHANGED",
+  "assurance": "NOT_VERIFIED",
+  "note": "Research evidence inventory. Not a pre-test claim freeze or operational verdict.",
+  "claims": [
+    {
+      "id": "KGS-001",
+      "status": "SPECIFIED",
+      "statement": "Capability does not itself authorize protected action",
+      "scope": "KAIROSEED documented design principle",
+      "evidence": [
+        "README.md",
+        "docs/ARCHITECTURE.md"
+      ],
+      "missing": "Independent enforcement evidence"
+    },
+    {
+      "id": "KGS-002",
+      "status": "CODE_PRESENT",
+      "statement": "Python governance prototype includes SQLite hash-linked evidence records",
+      "scope": "Prototype code only; no external effects",
+      "evidence": [
+        "prototypes/kairoseed-gaas-v0.1/kairoseed_gaas.py"
+      ],
+      "missing": "Independent storage and execution validation"
+    },
+    {
+      "id": "KGS-003",
+      "status": "CI_FAILED",
+      "statement": "Current-head GaaS test suite passes",
+      "scope": "Base commit 9b846da128e2ff325297dfde4a0860267e545313",
+      "evidence": [
+        "https://github.com/SangmuanValte/KAIROSEED-Governance-as-a-Service-GaaS-/actions/runs/42264348902"
+      ],
+      "missing": "Corrected test fixture and successful rerun"
+    },
+    {
+      "id": "KGS-004",
+      "status": "CODE_PRESENT",
+      "statement": "TypeScript reference adapter checks claims before its callback",
+      "scope": "Adapter implementation only",
+      "evidence": [
+        "src/kairoseed.ts",
+        "docs/ADAPTER.md"
+      ],
+      "missing": "Independent mediation and effect binding"
+    },
+    {
+      "id": "KGS-005",
+      "status": "CODE_PRESENT",
+      "statement": "Rego source declares epoch and evidence-scope authorization policy",
+      "scope": "GOVANA Rego policy model",
+      "evidence": [
+        "governance/govana_core.rego"
+      ],
+      "missing": "Verified policy deployment and comprehensive binding"
+    },
+    {
+      "id": "KGS-006",
+      "status": "CODE_PRESENT",
+      "statement": "Lean source expresses verification-inequality theorems in an abstract model",
+      "scope": "Abstract model under its assumptions",
+      "evidence": [
+        "formal/verification.lean"
+      ],
+      "missing": "Fresh prover output and runtime refinement"
+    },
+    {
+      "id": "KGS-007",
+      "status": "NOT_VERIFIED",
+      "statement": "JIREH enforces actual kernel containment",
+      "scope": "Proposed runtime mechanisms",
+      "evidence": [
+        "governance/jireh_ebpf.yaml"
+      ],
+      "missing": "Implemented instrumentation and independent effect measurements"
+    },
+    {
+      "id": "KGS-008",
+      "status": "NOT_VERIFIED",
+      "statement": "Lyapunov and spectral tests guarantee viable execution",
+      "scope": "JIREH mathematical research",
+      "evidence": [
+        "docs/SIGMASTAR.md"
+      ],
+      "missing": "G1/G2 explicit function, thresholds, bounds and independent tests"
+    },
+    {
+      "id": "KGS-009",
+      "status": "NOT_VERIFIED",
+      "statement": "PTZ-to-JIREH compiler preserves verified constraints",
+      "scope": "G3 compiler design requirement",
+      "evidence": [
+        "governance/jireh_ebpf.yaml"
+      ],
+      "missing": "Compiler code and validation artifacts"
+    },
+    {
+      "id": "KGS-010",
+      "status": "SPECIFIED",
+      "statement": "Independent containment test must inspect actual protected effects",
+      "scope": "Issue 30 research test contract",
+      "evidence": [
+        "https://github.com/SangmuanValte/KAIROSEED-Governance-as-a-Service-GaaS-/issues/30"
+      ],
+      "missing": "Executed independent test and protected-state evidence"
+    },
+    {
+      "id": "KGS-011",
+      "status": "NOT_VERIFIED",
+      "statement": "Evidence ledger offers independently verified production finality",
+      "scope": "L6 and receipt research",
+      "evidence": [
+        "governance/receipt_v1.schema.json",
+        "docs/EVIDENCE.md"
+      ],
+      "missing": "Independent receipts, trusted provenance and external effects"
+    },
+    {
+      "id": "KGS-012",
+      "status": "NOT_VERIFIED",
+      "statement": "Release verification and production controls are satisfied",
+      "scope": "Current-head release gate",
+      "evidence": [
+        "prototypes/kairoseed-gaas-v0.1/INDEPENDENT_VERIFICATION.md",
+        "https://github.com/SangmuanValte/KAIROSEED-Governance-as-a-Service-GaaS-/issues/10"
+      ],
+      "missing": "Green current-head CI, independently checked evidence, release approval"
+    }
+  ]
+}
